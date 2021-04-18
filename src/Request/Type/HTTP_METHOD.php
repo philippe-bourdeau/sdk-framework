@@ -15,14 +15,14 @@ use MabeEnum\Enum;
  *
  * Type of request
  *
- * @method static RequestType HTTP_POST()
- * @method static RequestType HTTP_GET()
- * @method static RequestType HTTP_PUT()
- * @method static RequestType HTTP_HEAD()
- * @method static RequestType HTTP_DELETE()
- * @method static RequestType HTTP_PATCH()
+ * @method static HTTP_METHOD HTTP_POST()
+ * @method static HTTP_METHOD HTTP_GET()
+ * @method static HTTP_METHOD HTTP_PUT()
+ * @method static HTTP_METHOD HTTP_HEAD()
+ * @method static HTTP_METHOD HTTP_DELETE()
+ * @method static HTTP_METHOD HTTP_PATCH()
  */
-class RequestType extends Enum
+class HTTP_METHOD extends Enum
 {
     const HTTP_GET = 'GET';
     const HTTP_POST = 'POST';

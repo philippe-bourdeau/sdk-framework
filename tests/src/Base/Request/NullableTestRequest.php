@@ -10,7 +10,7 @@ namespace ZEROSPAM\Framework\SDK\Test\Base\Request;
 
 use ZEROSPAM\Framework\SDK\Request\Api\HasNullableFields;
 use ZEROSPAM\Framework\SDK\Request\Api\WithNullableFields;
-use ZEROSPAM\Framework\SDK\Request\Type\RequestType;
+use ZEROSPAM\Framework\SDK\Request\Type\HTTP_METHOD;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
 
 class NullableTestRequest extends TestRequest implements WithNullableFields
@@ -37,11 +37,11 @@ class NullableTestRequest extends TestRequest implements WithNullableFields
     /**
      * Type of request.
      *
-     * @return RequestType
+     * @return HTTP_METHOD
      */
-    public function httpType(): RequestType
+    public function getMethod(): HTTP_METHOD
     {
-        return RequestType::HTTP_POST();
+        return HTTP_METHOD::HTTP_POST();
     }
 
 }

@@ -16,7 +16,6 @@ namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Response;
  */
 class TestDataResponse extends TestResponse
 {
-
     /**
      * @return TestResponse
      */

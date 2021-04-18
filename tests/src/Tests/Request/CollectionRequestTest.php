@@ -58,7 +58,7 @@ JSON;
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertCount(2, $response);
         $this->assertArrayNotHasKey(2, $response);
         $this->assertInstanceOf(TestResponse::class, $response[0]);
@@ -112,7 +112,7 @@ JSON;
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         /** @var TestResponse $testResponse */
         foreach ($response as $testResponse) {
             $this->assertInstanceOf(TestResponse::class, $testResponse);
@@ -166,7 +166,7 @@ JSON;
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertCount(2, $response);
 
         $response[0] = new \stdClass();
@@ -220,7 +220,7 @@ JSON;
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertCount(2, $response);
 
         unset($response[0]);

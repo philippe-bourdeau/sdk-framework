@@ -10,9 +10,6 @@ namespace ZEROSPAM\Framework\SDK\Test\Tests;
 
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Response;
-use ZEROSPAM\Framework\SDK\Client\Exception\SDKException;
-use ZEROSPAM\Framework\SDK\Client\Middleware\Error\AuthenticationMiddleware;
-use ZEROSPAM\Framework\SDK\Exception\Response\NoActionEmptyResponseException;
 use ZEROSPAM\Framework\SDK\Response\Api\EmptyResponse;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestDataResponse;
@@ -21,19 +18,6 @@ use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
 
 class ClientTest extends TestCase
 {
-    /**
-     */
-    public function testRegisterUnregisterMiddleware(): void
-    {
-        $this->expectException(SDKException::class);
-
-        $client = $this->preFailure([], 401);
-        $client->getOAuthTestClient()
-               ->registerMiddleware(new AuthenticationMiddleware())
-               ->unregisterMiddleware(new AuthenticationMiddleware())
-               ->processRequest(new TestRequest());
-    }
-
     public function testResponseAttributeBinding(): void
     {
         $client = $this->preSuccess(['test' => 'data']);
@@ -42,7 +26,7 @@ class ClientTest extends TestCase
         $client->getOAuthTestClient()
                ->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertInstanceOf(\stdClass::class, $response->test);
         $this->assertEquals('data', $response->test->test);
     }
@@ -56,7 +40,7 @@ class ClientTest extends TestCase
         $client->getOAuthTestClient()
                ->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertInstanceOf(Carbon::class, $response->test_date);
         $this->assertEquals($now, $response->test_date);
     }
@@ -69,7 +53,7 @@ class ClientTest extends TestCase
         $client->getOAuthTestClient()
                ->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertEquals('data', $response->getRawValue('test'));
     }
 
@@ -81,7 +65,7 @@ class ClientTest extends TestCase
         $client->getOAuthTestClient()
                ->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertThat(isset($response->added), $this->isTrue());
         $this->assertEquals('field', $response->get('added'));
     }
@@ -98,7 +82,7 @@ class ClientTest extends TestCase
         $client->getOAuthTestClient()
             ->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertEquals('data', $response->getRawValue('test'));
     }
 
@@ -110,59 +94,8 @@ class ClientTest extends TestCase
         $client->getOAuthTestClient()
                ->processRequest($request);
 
-        $response = $request->getResponse();
+        $response = $request->getGuzzleResponse();
         $this->assertNull($response->test_date);
-    }
-
-    public function testRateLimiting(): void
-    {
-        $client = $this->prepareQueue(
-            [
-                new Response(
-                    200,
-                    [
-                        'X-RateLimit-Remaining' => 10,
-                        'X-RateLimit-Limit'     => 60,
-                    ]
-                ),
-            ]
-        );
-
-        $request = new TestRequest();
-        $client->getOAuthTestClient()
-               ->processRequest($request);
-
-        $response  = $request->getResponse();
-        $rateLimit = $response->getRateLimit();
-        $this->assertEquals(10, $rateLimit->getRemaining());
-        $this->assertEquals(60, $rateLimit->getMaxPerMinute());
-    }
-
-    public function testRateLimitingBlocked(): void
-    {
-        $resetTime = Carbon::now()->addHour()->startOfMinute();
-        $client    = $this->prepareQueue(
-            [
-                new Response(
-                    200,
-                    [
-                        'X-RateLimit-Remaining' => 0,
-                        'X-RateLimit-Limit'     => 60,
-                        'X-RateLimit-Reset'     => $resetTime->timestamp,
-                    ]
-                ),
-            ]
-        );
-
-        $request = new TestRequest();
-        $client->getOAuthTestClient()
-               ->processRequest($request);
-
-        $response  = $request->getResponse();
-        $rateLimit = $response->getRateLimit();
-        $this->assertEquals(0, $rateLimit->getRemaining());
-        $this->assertEquals(60, $rateLimit->getMaxPerMinute());
-        $this->assertEquals($resetTime, $rateLimit->getEndOfThrottle());
     }
 
     /**

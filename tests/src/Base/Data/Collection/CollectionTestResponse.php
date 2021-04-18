@@ -13,7 +13,7 @@ use ZEROSPAM\Framework\SDK\Response\Api\Collection\CollectionResponse;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
 
-class CollectionTestResponse extends CollectionResponse
+class CollectionTestResponse extends CollectionResponse implements IResponse
 {
     /**
      * CollectionTestResponse constructor.

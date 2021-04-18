@@ -1,12 +1,8 @@
 <?php
 
-
 namespace ZEROSPAM\Framework\SDK\Client;
 
-
-use ZEROSPAM\Framework\SDK\Client\Middleware\IMiddleware;
-use ZEROSPAM\Framework\SDK\Client\Middleware\IPreRequestMiddleware;
-use ZEROSPAM\Framework\SDK\Config\BaseConfiguration;
+use ZEROSPAM\Framework\SDK\Configuration\IBaseConfiguration;
 use ZEROSPAM\Framework\SDK\Request\Api\IRequest;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
 
@@ -22,43 +18,7 @@ interface IClient
     public function processRequest(IRequest $request): IResponse;
 
     /**
-     * Register a pre request middleware
-     *
-     * @param IPreRequestMiddleware $middleware
-     *
-     * @return self
+     * @return IBaseConfiguration
      */
-    public function registerPreRequestMiddleware(IPreRequestMiddleware $middleware): self;
-
-    /**
-     * UnRegister a pre request middleware
-     *
-     * @param IPreRequestMiddleware $middleware
-     *
-     * @return self
-     */
-    public function unregisterPreRequestMiddleware(IPreRequestMiddleware $middleware): self;
-
-    /**
-     * Unregister the middleware.
-     *
-     * @param IMiddleware $middleware
-     *
-     * @return self
-     */
-    public function unregisterMiddleware(IMiddleware $middleware): self;
-
-    /**
-     * Register the given middleware.
-     *
-     * @param IMiddleware $middleware
-     *
-     * @return self
-     */
-    public function registerMiddleware(IMiddleware $middleware): self;
-
-    /**
-     * @return BaseConfiguration
-     */
-    public function getConfiguration(): BaseConfiguration;
+    public function getConfiguration(): IBaseConfiguration;
 }

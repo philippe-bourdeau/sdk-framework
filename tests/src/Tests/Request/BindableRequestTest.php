@@ -23,7 +23,7 @@ class BindableRequestTest extends TestCase
         $bindableRequest = new BindableTestRequest();
         $bindableRequest->setNiceId(4)->setTestId(5);
 
-        $this->assertEquals('test/5/nice/4', $bindableRequest->routeUrl());
+        $this->assertEquals('test/5/nice/4', $bindableRequest->uri());
     }
 
     /**
@@ -34,7 +34,7 @@ class BindableRequestTest extends TestCase
         $bindableRequest = new BindableTestRequest();
         $bindableRequest->setNiceId(4)->setTestEnum(BasicEnum::TEST());
 
-        $this->assertEquals('test/test/nice/4', $bindableRequest->routeUrl());
+        $this->assertEquals('test/test/nice/4', $bindableRequest->uri());
     }
 
     /**
@@ -45,7 +45,7 @@ class BindableRequestTest extends TestCase
         $bindableRequest = new BindableMultiTestRequest();
         $bindableRequest->setNiceId(4)->setTestId(5);
 
-        $this->assertEquals('test/5/nice/4/super/4', $bindableRequest->routeUrl());
+        $this->assertEquals('test/5/nice/4/super/4', $bindableRequest->uri());
     }
 
     /**

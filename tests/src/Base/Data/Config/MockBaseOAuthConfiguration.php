@@ -8,7 +8,7 @@
 
 namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Config;
 
-use ZEROSPAM\Framework\SDK\Config\OAuth\BaseOAuthConfiguration;
+use ZEROSPAM\Framework\SDK\Configuration\OAuth\BaseOAuthConfiguration;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Provider\TestProvider;
 
 /**

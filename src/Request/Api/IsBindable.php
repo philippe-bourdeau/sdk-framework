@@ -70,7 +70,7 @@ trait IsBindable
         return isset($this->routeBindings[$key]);
     }
 
-    public function routeUrl(): string
+    public function uri(): string
     {
         $bindingsPatterns = array_map(
             function ($item) {

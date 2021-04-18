@@ -21,7 +21,7 @@ use ZEROSPAM\Framework\SDK\Response\Api\BaseResponse;
  */
 class TestResponse extends BaseResponse
 {
-    protected $dates
+    protected array $dates
         = [
             'test_date',
         ];

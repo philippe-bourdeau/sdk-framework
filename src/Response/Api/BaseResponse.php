@@ -9,101 +9,29 @@
 namespace ZEROSPAM\Framework\SDK\Response\Api;
 
 use Carbon\Carbon;
-use ZEROSPAM\Framework\SDK\Response\Api\Helper\RateLimitedTrait;
-use ZEROSPAM\Framework\SDK\Utils\Contracts\DataObject;
-use ZEROSPAM\Framework\SDK\Utils\Reflection\ReflectionUtil;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Utils;
+use Psr\Http\Message\ResponseInterface;
 use ZEROSPAM\Framework\SDK\Utils\Str;
 
 /**
  * Class BaseResponse
  *
- * Reponse given by the client when processing a request.
- * Take care of providing generator for bindings
- *
  * @package ZEROSPAM\Framework\SDK\Response\Api
  */
-abstract class BaseResponse implements IRateLimitedResponse
+abstract class BaseResponse extends Response implements ResponseInterface, IResponse
 {
-    use RateLimitedTrait;
-
-    /**
-     * @var object[]
-     */
-    private $objReplacementCache = [];
-    /**
-     * @var array
-     */
-    protected $data;
-
-    /**
-     * Data unprocessed
-     *
-     * @var array
-     */
-    protected $rawData;
-
     /**
      * Dates to be transTyped from string to Carbon.
      *
      * @var string[]
      */
-    protected $dates = [];
+    protected array $dates = [];
 
     /**
-     * UserCreationResponse constructor.
-     *
-     * @param array $data
+     * @var array
      */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * Used internally
-     *
-     * @param array $data
-     */
-    public function setRawData(array $data)
-    {
-        $this->rawData = $data;
-    }
-
-    /**
-     * Used internally
-     *
-     * @return array
-     */
-    public function getRawData(): array
-    {
-        return $this->rawData;
-    }
-
-    /**
-     * Data contained in the response.
-     *
-     * @return array
-     */
-    public function data(): array
-    {
-        return $this->data;
-    }
-
-    /**
-     * Return value in response array of the response.
-     *
-     * @param $key
-     *
-     * @return mixed
-     */
-    public function getRawValue($key)
-    {
-        if (!array_key_exists($key, $this->data())) {
-            throw new \InvalidArgumentException(sprintf('key [%s] is not present in response array.', $key));
-        }
-
-        return $this->data()[$key];
-    }
+    public array $cache;
 
     /**
      * Get a specific field.
@@ -112,42 +40,37 @@ abstract class BaseResponse implements IRateLimitedResponse
      *
      * @return mixed|null
      */
-    public function get($field)
+    public function get(string $field)
     {
-        $key = 'get' . Str::studly($field) . 'Attribute';
+        $methodName = 'get' . Str::studly($field) . 'Attribute';
 
-        //check if attribute transformer exists
-        //Run it if exists and cache the result
-        if (method_exists($this, $key)) {
-            if (isset($this->objReplacementCache[$field])) {
-                return $this->objReplacementCache[$field];
+        if (method_exists($this, $methodName)) {
+            if (isset($this->cache[$field])) {
+                return $this->cache[$field];
             }
 
-            return $this->objReplacementCache[$field] = call_user_func(
+            return $this->cache[$field] = call_user_func(
                 [
                     $this,
-                    $key,
+                    $methodName,
                 ]
             );
         }
 
-        //Same as before but specific for dates
         if (isset($this->dates) && in_array($field, $this->dates)) {
-            if (isset($this->objReplacementCache[$field])) {
-                return $this->objReplacementCache[$field];
+            if (isset($this->cache[$field])) {
+                return $this->cache[$field];
             }
 
             if (!isset($this->data[$field])) {
                 return;
             }
 
-            if (!$dateTime
-                = Carbon::parse($this->data[$field])
-            ) {
+            if (!$dateTime = Carbon::parse($this->data[$field])) {
                 throw new \InvalidArgumentException('Date cannot be parsed');
             }
 
-            return $this->objReplacementCache[$field] = $dateTime;
+            return $this->cache[$field] = $dateTime;
         }
 
         if (isset($this->data[$field])) {
@@ -157,11 +80,11 @@ abstract class BaseResponse implements IRateLimitedResponse
 
     public function __isset($name)
     {
-        $key = 'get' . Str::studly($name) . 'Attribute';
+        $methodName = 'get' . Str::studly($name) . 'Attribute';
 
         return isset($this->data[$name])
-               || method_exists($this, $key)
-               || (isset($this->dates) && in_array($name, $this->dates));
+            || method_exists($this, $methodName)
+            || (isset($this->dates) && in_array($name, $this->dates));
     }
 
     public function __get($name)
@@ -170,12 +93,15 @@ abstract class BaseResponse implements IRateLimitedResponse
     }
 
     /**
-     * Populate the data object with the data present in the response
-     *
-     * @param DataObject $dataObject
+     * @return array
      */
-    public function populateDataObject(DataObject &$dataObject): void
+    public function bodyToArray(): array
     {
-        ReflectionUtil::populateResponseData($this, $dataObject);
+        $contents = $this->getBody()->getContents();
+        if (empty($contents)) {
+            return [];
+        }
+
+        return Utils::jsonDecode($contents, true);
     }
 }

@@ -8,9 +8,10 @@
 
 namespace ZEROSPAM\Framework\SDK\Test\Base\Request;
 
+use Psr\Http\Message\ResponseInterface;
 use ZEROSPAM\Framework\SDK\Request\Api\BaseRequest;
 use ZEROSPAM\Framework\SDK\Request\Api\IsBindable;
-use ZEROSPAM\Framework\SDK\Request\Type\RequestType;
+use ZEROSPAM\Framework\SDK\Request\Type\HTTP_METHOD;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
 use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicEnum;
 
@@ -80,9 +81,9 @@ class BindableTestRequest extends BaseRequest
     /**
      * Type of request.
      *
-     * @return RequestType
+     * @return HTTP_METHOD
      */
-    public function httpType(): RequestType
+    public function getMethod(): HTTP_METHOD
     {
         // TODO: Implement httpType() method.
     }
@@ -90,11 +91,11 @@ class BindableTestRequest extends BaseRequest
     /**
      * Process the data that is in the response.
      *
-     * @param array $jsonResponse
+     * @param ResponseInterface $response
      *
      * @return \ZEROSPAM\Framework\SDK\Response\Api\IResponse
      */
-    public function processResponse(array $jsonResponse): IResponse
+    public function processResponse(ResponseInterface $response): IResponse
     {
         // TODO: Implement processResponse() method.
     }

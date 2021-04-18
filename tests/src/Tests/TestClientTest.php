@@ -44,6 +44,21 @@ class TestClientTest extends TestCase
         $this->assertEquals('foo=bar', $query);
     }
 
+    public function testUri()
+    {
+        $client = $this->prepareQueue([
+            new Response(200),
+        ]);
+
+        $request = new TestRequest();
+        $client->processRequest($request);
+
+        $transaction = $client->lastTransaction();
+        $uri = $transaction->request()->getUri();
+
+        $this->assertEquals('test', (string) $uri);
+    }
+
     protected function prepareQueue(array $queue): TestClient
     {
         return new TestClient(

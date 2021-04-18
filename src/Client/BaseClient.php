@@ -6,48 +6,36 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use ZEROSPAM\Framework\SDK\Configuration\BaseConfiguration;
-use ZEROSPAM\Framework\SDK\Configuration\IBaseConfiguration;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\RequestOptions;
 use ZEROSPAM\Framework\SDK\Request\Api\IRequest;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
 
 abstract class BaseClient implements IClient
 {
-    protected IBaseConfiguration $configuration;
     protected ?ClientInterface $client;
 
     /**
      * Client constructor
      * Override client with your own custom client/handler or use configuration values
      *
-     * @param IBaseConfiguration $configuration
-     * @param ClientInterface|null $guzzleClient
+     * @param string $baseUri
+     * @param array $headers
+     * @param HandlerStack|null $handler
      */
-    public function __construct(IBaseConfiguration $configuration, ClientInterface $guzzleClient = null)
-    {
-        $this->configuration = $configuration;
-        $this->client = $guzzleClient;
-        if (!$this->client) {
-            $this->client = $client = new Client(
-                [
-                    'base_uri' => $configuration->getBaseUri(),
-                    'headers' => $configuration->defaultHeaders(),
-                    'handler' => $configuration->defaultHandler(),
-                ]
-            );
+    public function __construct(
+        string $baseUri,
+        array $headers = [],
+        HandlerStack $handler = null
+    ) {
+        $options = [];
+        $options[RequestOptions::HEADERS] = $headers;
+        $options['base_uri'] = $baseUri;
+        if ($handler) {
+            $options['handler'] = $handler;
         }
+        $this->client = $client = new Client($options);
     }
-
-    /**
-     * Get linked configuration
-     *
-     * @return BaseConfiguration
-     */
-    public function getConfiguration(): IBaseConfiguration
-    {
-        return $this->configuration;
-    }
-
 
     /**
      * Process the given request and return an array containing the results.
@@ -56,18 +44,16 @@ abstract class BaseClient implements IClient
      *
      * @return IResponse
      * @throws GuzzleException
-     * @throws Exception
      */
     public function processRequest(IRequest $request): IResponse
     {
         try {
-            $response = $this->client->request(
-                $request->getMethod(),
-                $request->uri(),
-                $request->generateOptions()
+            $response = $this->client->send(
+                $request,
+                $request->options()
             );
 
-            return $request->processResponse($response);
+            return $request->response($response);
         } catch (Exception $e) {
             throw $e;
         } catch (GuzzleException $e) {

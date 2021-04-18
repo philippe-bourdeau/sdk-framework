@@ -15,10 +15,5 @@ interface IClient
      *
      * @return IResponse
      */
-    public function processRequest(IRequest $request): IResponse;
-
-    /**
-     * @return IBaseConfiguration
-     */
-    public function getConfiguration(): IBaseConfiguration;
+    public function processRequest(IRequest $request);
 }

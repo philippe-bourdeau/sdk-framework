@@ -12,7 +12,7 @@ use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
 
 class TestClientTest extends TestCase
 {
-    public function testHeaders()
+    public function testClientDefaultHeaders()
     {
         $client = $this->prepareQueue([
             new Response(200),
@@ -26,6 +26,22 @@ class TestClientTest extends TestCase
 
         $header2 = $transaction->request()->getHeader('X-Test-Header-2');
         $this->assertEquals(200, $header2[0]);
+    }
+
+    public function testQueryParameters()
+    {
+        $client = $this->prepareQueue([
+            new Response(200),
+        ]);
+
+        $request = new TestRequest();
+        $request->setQueryParameter('foo', 'bar');
+        $client->processRequest($request);
+
+        $transaction = $client->lastTransaction();
+        $query = $transaction->request()->getUri()->getQuery();
+
+        $this->assertEquals('foo=bar', $query);
     }
 
     protected function prepareQueue(array $queue): TestClient

@@ -4,11 +4,8 @@
 namespace ZEROSPAM\Framework\SDK\Response\Api;
 
 
-interface IResponse
-{
+use Psr\Http\Message\ResponseInterface;
 
-    /**
-     * @return array
-     */
-    public function bodyToArray(): array;
+interface IResponse extends ResponseInterface
+{
 }

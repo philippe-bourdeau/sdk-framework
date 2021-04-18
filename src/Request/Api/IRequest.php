@@ -8,6 +8,7 @@
 
 namespace ZEROSPAM\Framework\SDK\Request\Api;
 
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
 
@@ -18,19 +19,14 @@ use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
  *
  * @package ZEROSPAM\Framework\SDK\Request\Api
  */
-interface IRequest
+interface IRequest extends RequestInterface
 {
     /**
-     * The url of the route.
+     * options to be added to the request
      *
-     * @return string
-     */
-    public function uri(): string;
-
-    /**
      * @return array
      */
-    public function generateOptions(): array;
+    public function options(): array;
 
     /**
      * Process the data that is in the response.
@@ -38,9 +34,5 @@ interface IRequest
      * @param ResponseInterface $response
      * @return IResponse
      */
-    public function processResponse(ResponseInterface $response): IResponse;
-
-    /**
-     */
-    public function method(): string;
+    public function response(ResponseInterface $response): IResponse;
 }

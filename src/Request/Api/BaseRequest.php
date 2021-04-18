@@ -9,8 +9,7 @@
 namespace ZEROSPAM\Framework\SDK\Request\Api;
 
 use GuzzleHttp\Psr7\Request;
-use Psr\Http\Message\ResponseInterface;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use GuzzleHttp\RequestOptions;
 
 /**
  * Class BaseRequest
@@ -24,8 +23,11 @@ abstract class BaseRequest extends Request implements IRequest
     public function __construct(array $headers = [], $body = null, $version = '1.1')
     {
         parent::__construct(
-            $this->method(),
-            $this->uri(),
+            $this->getMethod(),
+            $this->getUri(),
+            $headers,
+            $body,
+            $version
         );
     }
 
@@ -41,17 +43,11 @@ abstract class BaseRequest extends Request implements IRequest
     /**
      * @return array
      */
-    public function generateOptions(): array
+    public function options(): array
     {
         return [
-            'query' => $this->queryParameters,
-            'headers' => $this->getHeaders()
+            RequestOptions::QUERY => $this->queryParameters,
+            RequestOptions::HEADERS => $this->getHeaders(),
         ];
     }
-
-    /**
-     * @param ResponseInterface $response
-     * @return IResponse
-     */
-    abstract public function processResponse(ResponseInterface $response): IResponse;
 }

@@ -2,15 +2,12 @@
 
 namespace ZEROSPAM\Framework\SDK\Test\Base\Client;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use ZEROSPAM\Framework\SDK\Client\BaseClient;
-use ZEROSPAM\Framework\SDK\Configuration\IBaseConfiguration;
 
-class CustomTestClient extends BaseClient
+class TestClient extends BaseClient
 {
     private MockHandler $mockHandler;
     private array $container = [];
@@ -19,32 +16,21 @@ class CustomTestClient extends BaseClient
      * TestConf constructor.
      *
      * @param MockHandler $mockHandler
-     * @param IBaseConfiguration $configuration
      */
-    public function __construct(MockHandler $mockHandler, IBaseConfiguration $configuration)
+    public function __construct(MockHandler $mockHandler)
     {
         $this->mockHandler = $mockHandler;
-        $this->configuration = $configuration;
 
-        parent::__construct($configuration, $this->buildClient());
-    }
-
-    /**
-     * Build the client for this configuration.
-     *
-     * @return ClientInterface
-     */
-    public function buildClient(): ClientInterface
-    {
         $handler = HandlerStack::create($this->mockHandler);
         $handler->push(Middleware::history($this->container));
 
-        return new Client(
+        parent::__construct(
+            'http://127.0.2.1',
             [
-                'handler' => $handler,
-                'base_uri' => $this->configuration->getBaseUri(),
-                'headers' => $this->configuration->defaultHeaders()
-            ]
+                'X-Test-Header-1' => 100,
+                'X-Test-Header-2' => 200
+            ],
+            $handler
         );
     }
 

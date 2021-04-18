@@ -8,7 +8,9 @@
 
 namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Request;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 use ZEROSPAM\Framework\SDK\Request\Api\BaseRequest;
 use ZEROSPAM\Framework\SDK\Request\Type\HTTP_METHOD;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
@@ -24,16 +26,16 @@ class TestRequest extends BaseRequest
     /**
      * The url of the route.
      *
-     * @return string
+     * @return UriInterface
      */
-    public function uri(): string
+    public function getUri(): UriInterface
     {
-        return 'test';
+        return new Uri('test');
     }
 
     /**
      */
-    public function method(): string
+    public function getMethod(): string
     {
         return HTTP_METHOD::HTTP_GET;
     }
@@ -45,8 +47,8 @@ class TestRequest extends BaseRequest
      *
      * @return IResponse
      */
-    public function processResponse(ResponseInterface $response): IResponse
+    public function response(ResponseInterface $response): IResponse
     {
-        return new TestResponse();
+        return new TestResponse($response);
     }
 }

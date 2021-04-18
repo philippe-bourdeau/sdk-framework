@@ -19,8 +19,26 @@ use ZEROSPAM\Framework\SDK\Utils\Str;
  *
  * @package ZEROSPAM\Framework\SDK\Response\Api
  */
-abstract class BaseResponse extends Response implements ResponseInterface, IResponse
+abstract class BaseResponse extends Response implements IResponse
 {
+    /**
+     * @var ResponseInterface
+     */
+    private ResponseInterface $guzzleResponse;
+
+    public function __construct(ResponseInterface $response)
+    {
+        $this->guzzleResponse = $response;
+
+        parent::__construct(
+            $response->getStatusCode(),
+            $response->getHeaders(),
+            $response->getBody(),
+            $response->getProtocolVersion(),
+            $response->getReasonPhrase()
+        );
+    }
+
     /**
      * Dates to be transTyped from string to Carbon.
      *

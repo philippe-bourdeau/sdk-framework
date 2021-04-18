@@ -16,7 +16,6 @@ abstract class BaseClient implements IClient
     protected IBaseConfiguration $configuration;
     protected ?ClientInterface $client;
 
-
     /**
      * Client constructor
      * Override client with your own custom client/handler or use configuration values
@@ -64,7 +63,7 @@ abstract class BaseClient implements IClient
         try {
             $response = $this->client->request(
                 $request->getMethod(),
-                $request,
+                $request->uri(),
                 $request->generateOptions()
             );
 

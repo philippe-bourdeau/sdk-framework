@@ -12,8 +12,8 @@ use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Mockery as m;
-use ZEROSPAM\Framework\SDK\Test\Base\Config\TestClient;
-use ZEROSPAM\Framework\SDK\Test\Base\Container\Transaction;
+use ZEROSPAM\Framework\SDK\Test\Base\Client\TestClient;
+use ZEROSPAM\Framework\SDK\Test\Base\Client\Transaction;
 
 /**
  * Base for making the different tests

@@ -39,4 +39,8 @@ interface IRequest
      * @return IResponse
      */
     public function processResponse(ResponseInterface $response): IResponse;
+
+    /**
+     */
+    public function method(): string;
 }

@@ -21,6 +21,14 @@ use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
  */
 abstract class BaseRequest extends Request implements IRequest
 {
+    public function __construct(array $headers = [], $body = null, $version = '1.1')
+    {
+        parent::__construct(
+            $this->method(),
+            $this->uri(),
+        );
+    }
+
     protected array $queryParameters = [];
 
     public function setQueryParameter(string $key, string $value): self

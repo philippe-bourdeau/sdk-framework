@@ -17,7 +17,6 @@ use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
 /**
  * Class TestRequest.
  *
- * Test request
  * @method TestResponse getGuzzleResponse()
  */
 class TestRequest extends BaseRequest
@@ -33,13 +32,10 @@ class TestRequest extends BaseRequest
     }
 
     /**
-     * Type of request.
-     *
-     * @return HTTP_METHOD
      */
-    public function getMethod(): HTTP_METHOD
+    public function method(): string
     {
-        return HTTP_METHOD::HTTP_GET();
+        return HTTP_METHOD::HTTP_GET;
     }
 
     /**
@@ -47,10 +43,10 @@ class TestRequest extends BaseRequest
      *
      * @param ResponseInterface $response
      *
-     * @return \ZEROSPAM\Framework\SDK\Response\Api\IResponse
+     * @return IResponse
      */
     public function processResponse(ResponseInterface $response): IResponse
     {
-        return new TestResponse($response);
+        return new TestResponse();
     }
 }

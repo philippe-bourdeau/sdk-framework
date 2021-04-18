@@ -6,7 +6,7 @@
  * Time: 13:53.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Container;
+namespace ZEROSPAM\Framework\SDK\Test\Base\Client;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface;

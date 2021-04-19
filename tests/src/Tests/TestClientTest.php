@@ -6,9 +6,9 @@ namespace ZEROSPAM\Framework\SDK\Test\Tests;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
 use ZEROSPAM\Framework\SDK\Test\Base\Client\TestClient;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
+use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
 
 class TestClientTest extends TestCase
 {
@@ -20,7 +20,7 @@ class TestClientTest extends TestCase
 
         $client->processRequest(new TestRequest());
 
-        $transaction = $client->lastTransaction();
+        $transaction = $this->lastTransaction($client);
         $header1 = $transaction->request()->getHeader('X-Test-Header-1');
         $this->assertEquals(100, $header1[0]);
 
@@ -38,7 +38,7 @@ class TestClientTest extends TestCase
         $request->setQueryParameter('foo', 'bar');
         $client->processRequest($request);
 
-        $transaction = $client->lastTransaction();
+        $transaction = $this->lastTransaction($client);
         $query = $transaction->request()->getUri()->getQuery();
 
         $this->assertEquals('foo=bar', $query);
@@ -53,7 +53,7 @@ class TestClientTest extends TestCase
         $request = new TestRequest();
         $client->processRequest($request);
 
-        $transaction = $client->lastTransaction();
+        $transaction = $this->lastTransaction($client);
         $uri = $transaction->request()->getUri();
 
         $this->assertEquals('test', (string) $uri);
@@ -61,7 +61,7 @@ class TestClientTest extends TestCase
 
     protected function prepareQueue(array $queue): TestClient
     {
-        return new TestClient(
+        return $this->getTestClient(
             new MockHandler($queue)
         );
     }

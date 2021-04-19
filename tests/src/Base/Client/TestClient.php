@@ -45,25 +45,4 @@ class TestClient extends BaseClient
     {
         return $this->container;
     }
-
-    /**
-     * Retrieve last transaction in the history container stack
-     *
-     * @return Transaction|null null if no transaction done
-     */
-    public function lastTransaction(): ?Transaction
-    {
-        $last = count($this->container) - 1;
-        if ($last < 0) {
-            return null;
-        }
-        $lastTrans = $this->container[$last];
-
-        return new Transaction(
-            $lastTrans['request'],
-            $lastTrans['options'],
-            $lastTrans['response'],
-            $lastTrans['error']
-        );
-    }
 }

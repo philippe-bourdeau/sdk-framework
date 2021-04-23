@@ -36,6 +36,8 @@ class ClientTest extends TestCase
         $this->assertEquals('test_value', $response->test->test);
         $this->assertEquals('job', $response->nice);
     }
+
+    //TODO:: test mutators (date ...)
 }
 
 

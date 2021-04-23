@@ -34,7 +34,7 @@ abstract class BaseClient implements IClient
         if ($handler) {
             $options['handler'] = $handler;
         }
-        $this->client = $client = new Client($options);
+        $this->client = new Client($options);
     }
 
     /**

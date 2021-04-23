@@ -23,8 +23,8 @@ class TestClient extends BaseClient
         $this->mockHandler = $mockHandler;
 
         $handler = HandlerStack::create($this->mockHandler);
+        $handler->push(TestMiddlewares::addRequestHeader('X-Test-Middleware-Header', 'Hello World'), 'add_header');
         $handler->push(Middleware::history($this->container));
-        $handler->push(TestMiddlewares::addHeader('X-Test-Middleware-Header', 'Hello World'));
 
         parent::__construct(
             'http://127.0.2.1',

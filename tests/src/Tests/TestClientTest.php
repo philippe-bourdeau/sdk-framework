@@ -3,7 +3,6 @@
 
 namespace ZEROSPAM\Framework\SDK\Test\Tests;
 
-
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
 use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
 
@@ -13,7 +12,8 @@ class TestClientTest extends TestCase
     {
         $client = $this->prepareSuccess([]);
 
-        $client->processRequest(new TestRequest());
+        $request = new TestRequest();
+        $client->processRequest($request);
         $transaction = $this->lastTransaction($client);
 
         $header1 = $transaction->request()->getHeader('X-Test-Header-1');
@@ -30,9 +30,7 @@ class TestClientTest extends TestCase
         $client->processRequest(new TestRequest());
         $transaction = $this->lastTransaction($client);
 
-        var_dump($transaction->request()->getHeaders());
-
-        $header1 = $transaction->request()->getHeader('X-Test-Header-1');
-        $this->assertEquals('Goods', $header1[0]);
+        $header1 = $transaction->request()->getHeader('X-Test-Middleware-Header');
+        $this->assertEquals('Hello World', $header1[0]);
     }
 }

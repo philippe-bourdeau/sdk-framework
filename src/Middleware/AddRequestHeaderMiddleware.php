@@ -1,11 +1,11 @@
 <?php
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Middleware;
+namespace ZEROSPAM\Framework\SDK\Middleware;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 
-final class AddHeaderMiddleware
+final class AddRequestHeaderMiddleware
 {
     private string $value;
     private string $name;

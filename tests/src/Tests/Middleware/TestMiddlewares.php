@@ -3,6 +3,8 @@
 
 namespace ZEROSPAM\Framework\SDK\Test\Tests\Middleware;
 
+use ZEROSPAM\Framework\SDK\Middleware\AddRequestHeaderMiddleware;
+
 class TestMiddlewares
 {
     /**
@@ -12,10 +14,10 @@ class TestMiddlewares
      * @param string $value
      * @return callable Returns a function that accepts the next handler.
      */
-    public static function addHeader(string $name, string $value): callable
+    public static function addRequestHeader(string $name, string $value): callable
     {
-        return static function (callable $handler) use ($name, $value): AddHeaderMiddleware {
-            return new AddHeaderMiddleware($handler, $name, $value);
+        return static function (callable $handler) use ($name, $value): AddRequestHeaderMiddleware {
+            return new AddRequestHeaderMiddleware($handler, $name, $value);
         };
     }
 }

@@ -11,6 +11,7 @@ namespace ZEROSPAM\Framework\SDK\Test\Base;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Utils;
 use Mockery as m;
 use ZEROSPAM\Framework\SDK\Test\Base\Client\TestClient;
 use ZEROSPAM\Framework\SDK\Test\Base\Client\Transaction;
@@ -37,9 +38,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @param MockHandler $handler
      *
+     * @return TestClient
      * @see http://docs.guzzlephp.org/en/latest/testing.html
      *
-     * @return TestClient
      */
     protected function getTestClient(MockHandler $handler): TestClient
     {
@@ -92,41 +93,16 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Run to set a success.
-     *
-     * @param string|string[] $responseBody
-     * @param int             $statusCode
-     *
-     * @return TestClient
-     */
-    protected function preSuccess($responseBody, $statusCode = 200): TestClient
-    {
-        if (is_array($responseBody)) {
-            $responseBody = \GuzzleHttp\json_encode($responseBody, true);
-        }
-
-        $mockHandler = new MockHandler(
-            [
-                new Response($statusCode, [], $responseBody),
-            ]
-        );
-
-        $config = $this->getTestClient($mockHandler);
-
-        return $config;
-    }
-
-    /**
      * Validate that the request did contain the wanted arguments.
      *
-     * @param TestClient      $config
+     * @param TestClient $config
      * @param string|string[] $requestBody
      */
     protected function validateRequest(TestClient $config, $requestBody): void
     {
-        $trans    = $this->lastTransaction($config);
+        $trans = $this->lastTransaction($config);
         $contents = $trans->request()->getBody()->getContents();
-        $decode   = [];
+        $decode = [];
         if (!empty($contents)) {
             $decode = \GuzzleHttp\json_decode($contents, true);
         }
@@ -141,21 +117,35 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Prepare for a failure.
+     * Prepare handler queue for success response
      *
      * @param string|string[] $responseBody
-     * @param int             $statusCode Set the status code of the response
+     * @param int $statusCode
      *
      * @return TestClient
      */
-    protected function preFailure($responseBody, $statusCode = 422): TestClient
+    protected function prepareSuccess($responseBody, $statusCode = 200): TestClient
     {
-        if ($statusCode < 400) {
-            throw new \InvalidArgumentException('The status code to prepare for failure need to be >=400');
-        }
+        return $this->prepareMockHandlerQueue($responseBody, $statusCode);
+    }
 
+    /**
+     * Prepare handler queue for failure response
+     *
+     * @param string|string[] $responseBody
+     * @param int $statusCode Set the status code of the response
+     *
+     * @return TestClient
+     */
+    protected function prepareFailure($responseBody, $statusCode = 422): TestClient
+    {
+        return $this->prepareMockHandlerQueue($responseBody, $statusCode);
+    }
+
+    protected function prepareMockHandlerQueue($responseBody, int $statusCode): TestClient
+    {
         if (is_array($responseBody)) {
-            $responseBody = \GuzzleHttp\json_encode($responseBody, true);
+            $responseBody = Utils::jsonEncode($responseBody, true);
         }
 
         $mockHandler = new MockHandler(
@@ -164,10 +154,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
             ]
         );
 
-        $config = $this->getTestClient($mockHandler);
-
-        return $config;
+        return $this->getTestClient($mockHandler);
     }
+
 
     /**
      * Used to queue an exception.
@@ -186,61 +175,14 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Validate that the request URI contains the following strings.
-     *
-     * @param TestClient $config
-     * @param string[]   $contains
-     */
-    protected function validateRequestUrl(TestClient $config, array $contains): void
-    {
-        $trans = $this->lastTransaction($config);
-
-        $url = (string)$trans->request()->getUri();
-        foreach ($contains as $contain) {
-            $this->assertStringContainsString((string)$contain, $url, 'Url need to contain: ' . $contain);
-        }
-    }
-
-    /**
-     * Make sure url contains at least specified parts in contains.
-     *
-     * @param TestClient    $config
-     * @param array|string $elements
-     */
-    protected function validateUrl(TestClient $config, $elements): void
-    {
-        $trans = $this->lastTransaction($config);
-        $url = urldecode((string)$trans->request()->getUri());
-
-        if (is_string($elements)) {
-            $this->assertStringContainsString($elements, $url);
-
-            return;
-        }
-
-        $urlElements = explode('/', $url);
-
-        foreach ($elements as $element) {
-            $this->assertContains((string)$element, $urlElements, 'Url needs to contain: ' . $element);
-        }
-    }
-
-    /**
-     * Validate the query arguments
+     * Validate that the request URI matches expected Uri
      *
      * @param TestClient $client
-     * @param string     ...$elements
+     * @param string $expectedUri
      */
-    protected function validateQuery(TestClient $client, string...$elements): void
+    protected function validateRequestUri(TestClient $client, string $expectedUri): void
     {
         $trans = $this->lastTransaction($client);
-        $query = urldecode($trans->request()->getUri()->getQuery());
-
-
-        $urlElements = explode('&', $query);
-
-        foreach ($elements as $element) {
-            $this->assertContains((string)$element, $urlElements, 'Query needs to contain: ' . $element);
-        }
+        $this->assertEquals($expectedUri, $trans->request()->getUri());
     }
 }

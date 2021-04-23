@@ -4,26 +4,57 @@
 namespace ZEROSPAM\Framework\SDK\Test\Tests\Request;
 
 
+use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestChildRequest;
 use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
 use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
 
 class RequestUrlTest extends TestCase
 {
-    public function testValidateUrl()
+    public function testChildRequestUrl()
     {
-        $client = $this->preSuccess(['test' => 'data']);
-        $request = new TestRequest();
-        $client->getOAuthTestClient()->processRequest($request);
+        $client = $this->prepareSuccess([]);
 
-        $this->validateUrl($client, 'test');
+        $client->processRequest(new TestChildRequest());
+        $this->validateRequestUri($client, 'test/child');
     }
 
-    public function testValidateRequestUrl()
+    public function testSingleQueryParameter()
     {
-        $client = $this->preSuccess(['test' => 'data']);
-        $request = new TestRequest();
-        $client->getOAuthTestClient()->processRequest($request);
+        $client = $this->prepareSuccess([]);
 
-        $this->validateRequestUrl($client, ['tes']);
+        $request = new TestRequest();
+        $request->setQueryParameter('foo', 'bar');
+        $client->processRequest($request);
+
+        $query = $this->lastTransaction($client)->request()->getUri()->getQuery();
+
+        $this->assertEquals('foo=bar', $query);
+    }
+
+    public function testMultipleQueryParameters()
+    {
+        $client = $this->prepareSuccess([]);
+
+        $request = new TestRequest();
+        $request->setQueryParameter('foo', 'bar');
+        $request->setQueryParameter('kool', 'aid');
+        $client->processRequest($request);
+
+        $transaction = $this->lastTransaction($client);
+        $query = $transaction->request()->getUri()->getQuery();
+
+        $this->assertEquals('foo=bar&kool=aid', $query);
+    }
+
+    public function testUri()
+    {
+        $client = $this->prepareSuccess([]);
+
+        $request = new TestRequest();
+        $client->processRequest($request);
+
+        $uri = $this->lastTransaction($client)->request()->getUri();
+
+        $this->assertEquals('test', $uri);
     }
 }

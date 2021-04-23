@@ -67,7 +67,7 @@ class MiddlewareTests extends TestCase
 
     public function testPreRequestMiddleware(): void
     {
-        $client  = $this->preSuccess([]);
+        $client  = $this->prepareSuccess([]);
         $request = new TestRequest();
 
         $mock = \Mockery::mock(IRequestMiddleware::class)
@@ -84,7 +84,7 @@ class MiddlewareTests extends TestCase
 
     public function testRefreshTokenMiddleware(): void
     {
-        $client          = $this->preSuccess([]);
+        $client          = $this->prepareSuccess([]);
         $OAuthTestClient = $client->getOAuthTestClient();
 
         $token = new AccessToken(['access_token' => '45564', 'refresh_token' => "test"]);

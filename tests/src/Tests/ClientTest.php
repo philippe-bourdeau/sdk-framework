@@ -37,7 +37,7 @@ class ClientTest extends TestCase
      */
     public function testEmptyResponseWithRequest(): void
     {
-        $client = $this->preSuccess([]);
+        $client = $this->prepareSuccess([]);
 
         $request = \Mockery::mock(TestRequest::class)
                            ->makePartial()

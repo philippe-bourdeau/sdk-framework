@@ -1,0 +1,11 @@
+version: "3.4"
+
+services:
+  xdebug:
+    container_name: xdebug
+    build:
+      context: ./xdebug
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html/

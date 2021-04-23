@@ -2,9 +2,9 @@ version: "3.4"
 
 services:
   xdebug:
-    container_name: xdebug
+    container_name: xdebug-php-cli
     build:
-      context: ./xdebug
+      context: ./docker
     ports:
       - "80:80"
     volumes:

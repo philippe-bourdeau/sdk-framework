@@ -6,7 +6,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use ZEROSPAM\Framework\SDK\Client\BaseClient;
-use ZEROSPAM\Framework\SDK\Test\Tests\Middleware\TestMiddlewares;
+use ZEROSPAM\Framework\SDK\Test\Tests\Middleware\TestingMiddlewares;
 
 class TestClient extends BaseClient
 {
@@ -23,7 +23,7 @@ class TestClient extends BaseClient
         $this->mockHandler = $mockHandler;
 
         $handler = HandlerStack::create($this->mockHandler);
-        $handler->push(TestMiddlewares::addRequestHeader('X-Test-Middleware-Header', 'Hello World'), 'add_header');
+        $handler->push(TestingMiddlewares::addRequestHeader('X-Test-Middleware-Header', 'Hello World'));
         $handler->push(Middleware::history($this->container));
 
         parent::__construct(

@@ -5,7 +5,7 @@ namespace ZEROSPAM\Framework\SDK\Test\Tests\Middleware;
 
 use ZEROSPAM\Framework\SDK\Middleware\AddRequestHeaderMiddleware;
 
-class TestMiddlewares
+class TestingMiddlewares
 {
     /**
      * Middleware that handles request redirects.

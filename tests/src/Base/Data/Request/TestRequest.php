@@ -18,8 +18,6 @@ use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
 
 /**
  * Class TestRequest.
- *
- * @method TestResponse getGuzzleResponse()
  */
 class TestRequest extends BaseRequest
 {

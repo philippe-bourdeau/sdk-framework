@@ -28,9 +28,8 @@ class TestResponse extends BaseResponse
 
     public function getTestAttribute(): \stdClass
     {
-        $test = $this->data['test'];
         $obj = new \stdClass();
-        $obj->test = $test;
+        $obj->test = $this->data['test'];
 
         return $obj;
     }

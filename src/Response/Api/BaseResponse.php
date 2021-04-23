@@ -22,6 +22,15 @@ use ZEROSPAM\Framework\SDK\Utils\Str;
 abstract class BaseResponse extends Response implements IResponse
 {
     /**
+     * Dates to be transTyped from string to Carbon.
+     *
+     * @var string[]
+     */
+    protected array $dates = [];
+
+    protected array $data;
+
+    /**
      * @var ResponseInterface
      */
     private ResponseInterface $guzzleResponse;
@@ -29,6 +38,7 @@ abstract class BaseResponse extends Response implements IResponse
     public function __construct(ResponseInterface $response)
     {
         $this->guzzleResponse = $response;
+        $this->data = $this->bodyToArray();
 
         parent::__construct(
             $response->getStatusCode(),
@@ -40,16 +50,29 @@ abstract class BaseResponse extends Response implements IResponse
     }
 
     /**
-     * Dates to be transTyped from string to Carbon.
-     *
-     * @var string[]
+     * @return array
      */
-    protected array $dates = [];
+    public function bodyToArray(): array
+    {
+        $contents = $this->guzzleResponse->getBody()->getContents();
+        if (empty($contents)) {
+            return [];
+        }
 
-    /**
-     * @var array
-     */
-    public array $cache;
+        return Utils::jsonDecode($contents, true);
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->data[$name])
+            || method_exists($this, sprintf('get%sAttribute', Str::studly($name)))
+            || (isset($this->dates) && in_array($name, $this->dates));
+    }
+
+    public function __get($name)
+    {
+        return $this->get($name);
+    }
 
     /**
      * Get a specific field.
@@ -60,14 +83,9 @@ abstract class BaseResponse extends Response implements IResponse
      */
     public function get(string $field)
     {
-        $methodName = 'get' . Str::studly($field) . 'Attribute';
-
+        $methodName = sprintf('get%sAttribute', Str::studly($field));
         if (method_exists($this, $methodName)) {
-            if (isset($this->cache[$field])) {
-                return $this->cache[$field];
-            }
-
-            return $this->cache[$field] = call_user_func(
+            return call_user_func(
                 [
                     $this,
                     $methodName,
@@ -76,50 +94,13 @@ abstract class BaseResponse extends Response implements IResponse
         }
 
         if (isset($this->dates) && in_array($field, $this->dates)) {
-            if (isset($this->cache[$field])) {
-                return $this->cache[$field];
-            }
-
-            if (!isset($this->data[$field])) {
-                return;
-            }
-
             if (!$dateTime = Carbon::parse($this->data[$field])) {
                 throw new \InvalidArgumentException('Date cannot be parsed');
             }
 
-            return $this->cache[$field] = $dateTime;
+            return $dateTime;
         }
 
-        if (isset($this->data[$field])) {
-            return $this->data[$field];
-        }
-    }
-
-    public function __isset($name)
-    {
-        $methodName = 'get' . Str::studly($name) . 'Attribute';
-
-        return isset($this->data[$name])
-            || method_exists($this, $methodName)
-            || (isset($this->dates) && in_array($name, $this->dates));
-    }
-
-    public function __get($name)
-    {
-        return $this->get($name);
-    }
-
-    /**
-     * @return array
-     */
-    public function bodyToArray(): array
-    {
-        $contents = $this->getBody()->getContents();
-        if (empty($contents)) {
-            return [];
-        }
-
-        return Utils::jsonDecode($contents, true);
+        return $this->data[$field] ?? null;
     }
 }

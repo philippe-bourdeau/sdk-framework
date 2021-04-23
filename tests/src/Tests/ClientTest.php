@@ -22,4 +22,20 @@ class ClientTest extends TestCase
         $header2 = $transaction->request()->getHeader('X-Test-Header-2');
         $this->assertEquals(200, $header2[0]);
     }
+
+    public function testResponse()
+    {
+        $client = $this->prepareSuccess([
+            'test' => 'test_value',
+            'nice' => 'job'
+        ]);
+
+        $request = new TestRequest();
+        $response = $client->processRequest($request);
+
+        $this->assertEquals('test_value', $response->test->test);
+        $this->assertEquals('job', $response->nice);
+    }
 }
+
+

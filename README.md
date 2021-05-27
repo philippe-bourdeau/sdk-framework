@@ -9,4 +9,5 @@ l'interface est important ?
 
 * Constructeur de ces deux dernieres classes.
 
-* Transformation de la reponse; propriete d'une classe ?
+* Transformation de la reponse et automatisation des proprietes
+* Collection response

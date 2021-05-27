@@ -50,7 +50,7 @@ class CollectionTestRequest extends BaseRequest
      *
      * @return \ZEROSPAM\Framework\SDK\Response\Api\IResponse
      */
-    public function processResponse(ResponseInterface $response): IResponse
+    public function response(ResponseInterface $response): IResponse
     {
         return new CollectionTestResponse($response);
     }

@@ -51,20 +51,6 @@ class BindableRequestTest extends TestCase
     /**
      * @test
      */
-    public function bindable_test_to_array_without_bindings()
-    {
-        $bindableRequest = new BindableMultiTestRequest();
-        $bindableRequest->setNiceId(4)->setTestId(5)->setTest('foo');
-
-        $toArray = $bindableRequest->toArray();
-        $this->assertArrayNotHasKey('bindings', $toArray);
-        $this->assertArrayHasKey('test', $toArray);
-        $this->assertEquals('foo', $toArray['test']);
-    }
-
-    /**
-     * @test
-     */
     public function bindable_failure_exception_object()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -93,5 +79,20 @@ class BindableRequestTest extends TestCase
 
         $bindableRequest = new BindableMultiTestRequest();
         $bindableRequest->setNiceId(1)->setNiceId(5);
+    }
+
+    /**
+     * @test
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function bindableRequestResponse()
+    {
+        $bindableRequest = new BindableTestRequest();
+        $bindableRequest->setNiceId(4)->setTestEnum(BasicEnum::TEST());
+
+        $client = $this->prepareClientSuccess([]);
+        $response = $client->processRequest($bindableRequest);
+
+        $this->assertEquals('test/test/nice/4', $bindableRequest->uri());
     }
 }

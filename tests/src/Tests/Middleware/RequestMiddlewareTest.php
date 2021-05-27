@@ -9,7 +9,7 @@ class RequestMiddlewareTest extends TestCase
 {
     public function testRequestMiddleware()
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $client->processRequest(new TestRequest());
         $transaction = $this->lastTransaction($client);

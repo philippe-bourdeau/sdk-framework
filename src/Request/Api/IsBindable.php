@@ -40,7 +40,7 @@ trait IsBindable
      * @param      $value
      * @param bool $override
      */
-    protected function addBinding($key, $value, $override = false): void
+    protected function addRouteBinding($key, $value, $override = false): void
     {
         //addBinding(orgId, 5)
         if (isset($this->routeBindings[$key]) && !$override) {

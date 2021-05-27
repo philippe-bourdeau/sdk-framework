@@ -2,7 +2,6 @@
 
 namespace ZEROSPAM\Framework\SDK\Client;
 
-use ZEROSPAM\Framework\SDK\Configuration\IBaseConfiguration;
 use ZEROSPAM\Framework\SDK\Request\Api\IRequest;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
 

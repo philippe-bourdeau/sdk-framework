@@ -12,7 +12,7 @@ class RequestUrlTest extends TestCase
 {
     public function testChildRequestUrl()
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $client->processRequest(new TestChildRequest());
         $this->validateRequestUri($client, 'test/child');
@@ -20,7 +20,7 @@ class RequestUrlTest extends TestCase
 
     public function testSingleQueryParameter()
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $request = new TestRequest();
         $request->setQueryParameter('foo', 'bar');
@@ -33,7 +33,7 @@ class RequestUrlTest extends TestCase
 
     public function testMultipleQueryParameters()
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $request = new TestRequest();
         $request->setQueryParameter('foo', 'bar');
@@ -48,7 +48,7 @@ class RequestUrlTest extends TestCase
 
     public function testUri()
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $request = new TestRequest();
         $client->processRequest($request);

@@ -19,7 +19,7 @@ class NullableRequestTest extends TestCase
      */
     public function testNullFieldInRequestSet(): void
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $request = new NullableTestRequest();
         $request->setNullField(null);
@@ -34,7 +34,7 @@ class NullableRequestTest extends TestCase
      */
     public function testNullFieldInRequestNotSet(): void
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $request = new NullableTestRequest();
 

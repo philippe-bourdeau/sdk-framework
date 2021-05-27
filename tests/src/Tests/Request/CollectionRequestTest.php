@@ -53,7 +53,7 @@ class CollectionRequestTest extends TestCase
 }
 JSON;
 
-        $client = $this->prepareSuccess($json);
+        $client = $this->prepareClientSuccess($json);
 
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
@@ -107,7 +107,7 @@ JSON;
 }
 JSON;
 
-        $client = $this->prepareSuccess($json);
+        $client = $this->prepareClientSuccess($json);
 
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
@@ -161,7 +161,7 @@ JSON;
 }
 JSON;
 
-        $client = $this->prepareSuccess($json);
+        $client = $this->prepareClientSuccess($json);
 
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);
@@ -215,7 +215,7 @@ JSON;
 }
 JSON;
 
-        $client = $this->prepareSuccess($json);
+        $client = $this->prepareClientSuccess($json);
 
         $request = new CollectionTestRequest();
         $client->getOAuthTestClient()->processRequest($request);

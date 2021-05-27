@@ -10,7 +10,7 @@ class ClientTest extends TestCase
 {
     public function testDefaultHeaders()
     {
-        $client = $this->prepareSuccess([]);
+        $client = $this->prepareClientSuccess([]);
 
         $request = new TestRequest();
         $client->processRequest($request);
@@ -25,7 +25,7 @@ class ClientTest extends TestCase
 
     public function testResponse()
     {
-        $client = $this->prepareSuccess([
+        $client = $this->prepareClientSuccess([
             'test' => 'test_value',
             'nice' => 'job'
         ]);

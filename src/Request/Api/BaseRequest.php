@@ -20,14 +20,13 @@ use GuzzleHttp\RequestOptions;
  */
 abstract class BaseRequest extends Request implements IRequest
 {
-    public function __construct(array $headers = [], $body = null, $version = '1.1')
+    public function __construct(array $headers = [], $body = null)
     {
         parent::__construct(
             $this->getMethod(),
             $this->getUri(),
             $headers,
-            $body,
-            $version
+            $body
         );
     }
 

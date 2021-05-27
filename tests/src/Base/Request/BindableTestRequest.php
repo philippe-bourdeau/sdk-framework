@@ -11,8 +11,8 @@ namespace ZEROSPAM\Framework\SDK\Test\Base\Request;
 use Psr\Http\Message\ResponseInterface;
 use ZEROSPAM\Framework\SDK\Request\Api\BaseRequest;
 use ZEROSPAM\Framework\SDK\Request\Api\IsBindable;
-use ZEROSPAM\Framework\SDK\Request\Type\HTTP_METHOD;
 use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
 use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicEnum;
 
 /**
@@ -49,21 +49,21 @@ class BindableTestRequest extends BaseRequest
      */
     public function setNiceId($id)
     {
-        $this->addBinding('niceId', $id, false);
+        $this->addRouteBinding('niceId', $id, false);
 
         return $this;
     }
 
     public function setTestId($id)
     {
-        $this->addBinding('testId', $id);
+        $this->addRouteBinding('testId', $id);
 
         return $this;
     }
 
     public function setTestEnum(BasicEnum $enum)
     {
-        $this->addBinding('testId', $enum);
+        $this->addRouteBinding('testId', $enum);
 
         return $this;
     }
@@ -81,22 +81,15 @@ class BindableTestRequest extends BaseRequest
     /**
      * Type of request.
      *
-     * @return HTTP_METHOD
+     * @return string
      */
-    public function getMethod(): HTTP_METHOD
+    public function getMethod()
     {
-        // TODO: Implement httpType() method.
+        return 'GET';
     }
 
-    /**
-     * Process the data that is in the response.
-     *
-     * @param ResponseInterface $response
-     *
-     * @return \ZEROSPAM\Framework\SDK\Response\Api\IResponse
-     */
-    public function processResponse(ResponseInterface $response): IResponse
+    public function response(ResponseInterface $response): IResponse
     {
-        // TODO: Implement processResponse() method.
+        return new TestResponse($response);
     }
 }

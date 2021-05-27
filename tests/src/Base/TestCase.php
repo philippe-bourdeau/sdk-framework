@@ -124,7 +124,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      *
      * @return TestClient
      */
-    protected function prepareSuccess($responseBody, $statusCode = 200): TestClient
+    protected function prepareClientSuccess($responseBody, $statusCode = 200): TestClient
     {
         return $this->prepareMockHandlerQueue($responseBody, $statusCode);
     }

@@ -26,11 +26,36 @@ class TestResponse extends BaseResponse
             'test_date',
         ];
 
+    public Company $company;
+    public string $color;
+
     public function getTestAttribute(): \stdClass
     {
         $obj = new \stdClass();
         $obj->test = $this->data['test'];
 
         return $obj;
+    }
+
+    public function setColor(string $color)
+    {
+        $this->color = $color;
+    }
+
+    public function setCompany(array $properties)
+    {
+        $this->company = new Company(
+            $properties['building'],
+            $properties['stages']
+        );
+    }
+}
+
+class Company {
+    public function __construct(
+        public int $building = 0,
+        public array $stages = []
+    ) {
+
     }
 }

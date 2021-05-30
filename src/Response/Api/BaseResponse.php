@@ -12,7 +12,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\ResponseInterface;
-use Stainless\Client\Utils\Reflection\ReflectionUtil;
 use Stainless\Client\Utils\Str;
 
 /**
@@ -28,18 +27,12 @@ abstract class BaseResponse extends Response implements IResponse
      * @var string[]
      */
     protected array $dates = [];
-
     protected array $data;
-
-    /**
-     * @var ResponseInterface
-     */
     private ResponseInterface $guzzleResponse;
 
     public function __construct(ResponseInterface $response)
     {
         $this->guzzleResponse = $response;
-        $this->setProperties($response);
 
         parent::__construct(
             $response->getStatusCode(),
@@ -48,16 +41,24 @@ abstract class BaseResponse extends Response implements IResponse
             $response->getProtocolVersion(),
             $response->getReasonPhrase()
         );
+
+        $this->setProperties();
     }
 
     /**
      */
-    private function setProperties(ResponseInterface $response)
+    private function setProperties()
     {
-        $contents = $this->guzzleResponse->getBody()->getContents() ?? [];
-        $arrayToObject = Utils::jsonDecode(Utils::jsonEncode($contents));
+        $this->data = $data = Utils::jsonDecode($this->getBody()->getContents(), true);
 
-        ReflectionUtil::setProperties($arrayToObject, $this);
+        foreach ($data as $key => $value) {
+            $method = sprintf('set%s', ucfirst(Str::camel($key)));
+            if (!method_exists($this, $method)) {
+                continue;
+            }
+
+            $this->{$method}($value);
+        }
     }
 
     public function __isset($name)

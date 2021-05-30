@@ -98,19 +98,23 @@ class ReflectionTest extends TestCase
         $array = [
             'cool' => [
                 'sauce' => 'red',
-                'goood' => 'times'
+                'goood' => 'times',
             ],
-            'nice' => 'view',
-            'plop'
+            'color' => 'yellow',
+            'company' => [
+                'building' => 111,
+                'stages' => [1, 2, 3]
+            ]
         ];
 
         $response = new TestResponse(new Response(
             200,
             [],
             Utils::jsonEncode($array)
-        ));
+            )
+        );
 
-        $this->assertTrue($response->{'nice'} === 'view');
+        $this->assertTrue($response->company->building === 111);
     }
 
 }

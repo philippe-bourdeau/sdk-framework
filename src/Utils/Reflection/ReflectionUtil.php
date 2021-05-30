@@ -9,7 +9,6 @@
 namespace Stainless\Client\Utils\Reflection;
 
 use Carbon\Carbon;
-use GuzzleHttp\Utils;
 use Stainless\Client\Request\Api\WithNullableFields;
 use Stainless\Client\Response\Api\IResponse;
 use Stainless\Client\Utils\Contracts\Arrayable;
@@ -27,35 +26,6 @@ final class ReflectionUtil
 {
     private function __construct()
     {
-    }
-
-    public static function arrayToObject(array $array) {
-        return Utils::jsonDecode(Utils::jsonEncode($array));
-    }
-
-    /**
-     * Set object properties using another object and reflection
-     *
-     * @param $input
-     * @param $destination
-     * @throws \ReflectionException
-     */
-    public static function setProperties($input, $destination): void {
-        $reflectionProperties = (new \ReflectionClass($destination))->getProperties();
-
-        array_walk(
-            $reflectionProperties,
-            function (
-                array $result,
-                \ReflectionProperty $property
-            ) use (
-                $input, $destination
-            ) {
-                $property->setAccessible(true);
-
-                $destination->{$property->getName()} = $property->getValue($input);
-            },
-        );
     }
 
     /**

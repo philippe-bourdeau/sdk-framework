@@ -1,9 +1,9 @@
 <?php
 
-namespace ZEROSPAM\Framework\SDK\Client;
+namespace Stainless\Client\Client;
 
-use ZEROSPAM\Framework\SDK\Request\Api\IRequest;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use Stainless\Client\Request\Api\IRequest;
+use Stainless\Client\Response\Api\IResponse;
 
 interface IClient
 {

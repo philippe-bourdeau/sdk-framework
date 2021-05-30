@@ -6,18 +6,18 @@
  * Time: 11:09
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Collection;
+namespace Stainless\Client\Test\Base\Data\Collection;
 
 use Psr\Http\Message\ResponseInterface;
-use ZEROSPAM\Framework\SDK\Request\Api\BaseRequest;
-use ZEROSPAM\Framework\SDK\Request\Type\HTTP_METHOD;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use Stainless\Client\Request\Api\BaseRequest;
+use Stainless\Client\Request\Type\HTTP_METHOD;
+use Stainless\Client\Response\Api\IResponse;
 
 /**
  * Class CollectionTestRequest
  *
  * @method CollectionTestResponse getGuzzleResponse()
- * @package ZEROSPAM\Framework\SDK\Test\Base\Data\Collection
+ * @package Stainless\Client\Test\Base\Data\Collection
  */
 class CollectionTestRequest extends BaseRequest
 {
@@ -48,7 +48,7 @@ class CollectionTestRequest extends BaseRequest
      *
      * @param ResponseInterface $response
      *
-     * @return \ZEROSPAM\Framework\SDK\Response\Api\IResponse
+     * @return \Stainless\Client\Response\Api\IResponse
      */
     public function response(ResponseInterface $response): IResponse
     {

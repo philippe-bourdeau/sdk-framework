@@ -6,18 +6,19 @@
  * Time: 4:08 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Response\Api;
+namespace Stainless\Client\Response\Api;
 
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\ResponseInterface;
-use ZEROSPAM\Framework\SDK\Utils\Str;
+use Stainless\Client\Utils\Reflection\ReflectionUtil;
+use Stainless\Client\Utils\Str;
 
 /**
  * Class BaseResponse
  *
- * @package ZEROSPAM\Framework\SDK\Response\Api
+ * @package Stainless\Client\Response\Api
  */
 abstract class BaseResponse extends Response implements IResponse
 {
@@ -38,7 +39,7 @@ abstract class BaseResponse extends Response implements IResponse
     public function __construct(ResponseInterface $response)
     {
         $this->guzzleResponse = $response;
-        $this->data = $this->bodyToArray();
+        $this->setProperties($response);
 
         parent::__construct(
             $response->getStatusCode(),
@@ -50,16 +51,13 @@ abstract class BaseResponse extends Response implements IResponse
     }
 
     /**
-     * @return array
      */
-    public function bodyToArray(): array
+    private function setProperties(ResponseInterface $response)
     {
-        $contents = $this->guzzleResponse->getBody()->getContents();
-        if (empty($contents)) {
-            return [];
-        }
+        $contents = $this->guzzleResponse->getBody()->getContents() ?? [];
+        $arrayToObject = Utils::jsonDecode(Utils::jsonEncode($contents));
 
-        return Utils::jsonDecode($contents, true);
+        ReflectionUtil::setProperties($arrayToObject, $this);
     }
 
     public function __isset($name)

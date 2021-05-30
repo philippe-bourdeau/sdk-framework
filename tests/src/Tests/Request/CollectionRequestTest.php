@@ -6,11 +6,11 @@
  * Time: 11:15
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Request;
+namespace Stainless\Client\Test\Tests\Request;
 
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Collection\CollectionTestRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
+use Stainless\Client\Test\Base\Data\Collection\CollectionTestRequest;
+use Stainless\Client\Test\Base\Data\Response\TestResponse;
+use Stainless\Client\Test\Base\TestCase;
 
 class CollectionRequestTest extends TestCase
 {

@@ -6,7 +6,7 @@
  * Time: 09:44
  */
 
-namespace ZEROSPAM\Framework\SDK\Request\Api;
+namespace Stainless\Client\Request\Api;
 
 interface WithNullableFields
 {

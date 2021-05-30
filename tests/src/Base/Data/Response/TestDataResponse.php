@@ -6,13 +6,13 @@
  * Time: 11:02
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Response;
+namespace Stainless\Client\Test\Base\Data\Response;
 
 /**
  * Class TestDataResponse
  *
  * @property-read TestResponse $data
- * @package ZEROSPAM\Framework\SDK\Test\Base\Data
+ * @package Stainless\Client\Test\Base\Data
  */
 class TestDataResponse extends TestResponse
 {

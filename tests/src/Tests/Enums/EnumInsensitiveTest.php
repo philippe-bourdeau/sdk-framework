@@ -6,11 +6,11 @@
  * Time: 9:10 AM
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Enums;
+namespace Stainless\Client\Test\Tests\Enums;
 
 
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicEnum;
+use Stainless\Client\Test\Base\TestCase;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
 
 class EnumInsensitiveTest extends TestCase
 {

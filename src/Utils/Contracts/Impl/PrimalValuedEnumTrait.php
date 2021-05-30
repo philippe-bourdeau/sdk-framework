@@ -6,7 +6,7 @@
  * Time: 15:26.
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Contracts\Impl;
+namespace Stainless\Client\Utils\Contracts\Impl;
 
 use MabeEnum\Enum;
 
@@ -16,7 +16,7 @@ use MabeEnum\Enum;
  * Used with Mabe/Enum package
  *
  * @see     Enum
- * @package ZEROSPAM\Framework\SDK\Utils\Contracts\Impl
+ * @package Stainless\Client\Utils\Contracts\Impl
  */
 trait PrimalValuedEnumTrait
 {

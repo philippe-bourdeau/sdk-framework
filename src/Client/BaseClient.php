@@ -1,6 +1,6 @@
 <?php
 
-namespace ZEROSPAM\Framework\SDK\Client;
+namespace Stainless\Client\Client;
 
 use Exception;
 use GuzzleHttp\Client;
@@ -8,8 +8,8 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
-use ZEROSPAM\Framework\SDK\Request\Api\IRequest;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use Stainless\Client\Request\Api\IRequest;
+use Stainless\Client\Response\Api\IResponse;
 
 abstract class BaseClient implements IClient
 {

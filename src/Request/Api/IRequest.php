@@ -6,18 +6,18 @@
  * Time: 4:49 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Request\Api;
+namespace Stainless\Client\Request\Api;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use Stainless\Client\Response\Api\IResponse;
 
 /**
  * Interface IRequest
  *
  * Request sent to the API server.
  *
- * @package ZEROSPAM\Framework\SDK\Request\Api
+ * @package Stainless\Client\Request\Api
  */
 interface IRequest extends RequestInterface
 {

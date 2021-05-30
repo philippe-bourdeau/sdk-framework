@@ -6,14 +6,14 @@
  * Time: 13:06
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Contracts;
+namespace Stainless\Client\Utils\Contracts;
 
 /**
  * Interface DataObject
  *
  * Represent an object that old the data used in requests
  *
- * @package ZEROSPAM\Framework\SDK\Utils\Contracts
+ * @package Stainless\Client\Utils\Contracts
  */
 interface DataObject extends Arrayable
 {

@@ -6,22 +6,22 @@
  * Time: 13:51.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base;
+namespace Stainless\Client\Test\Base;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Utils;
 use Mockery as m;
-use ZEROSPAM\Framework\SDK\Test\Base\Client\TestClient;
-use ZEROSPAM\Framework\SDK\Test\Base\Client\Transaction;
+use Stainless\Client\Test\Base\Client\TestClient;
+use Stainless\Client\Test\Base\Client\Transaction;
 
 /**
  * Base for making the different tests
  *
  * Help you with a TestClient and preparing different kind of request
  *
- * @package ZEROSPAM\Framework\SDK\Test\Base
+ * @package Stainless\Client\Test\Base
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {

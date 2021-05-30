@@ -6,18 +6,18 @@
  * Time: 11:38
  */
 
-namespace ZEROSPAM\Framework\SDK\Response\Api\Collection;
+namespace Stainless\Client\Response\Api\Collection;
 
-use ZEROSPAM\Framework\SDK\Response\Api\BaseResponse;
-use ZEROSPAM\Framework\SDK\Response\Api\Collection\Iterator\ImmutableTransformerIterator;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
+use Stainless\Client\Response\Api\BaseResponse;
+use Stainless\Client\Response\Api\Collection\Iterator\ImmutableTransformerIterator;
+use Stainless\Client\Response\Api\IResponse;
 
 /**
  * Class CollectionResponse
  *
  * Represent a response that contains more Responses
  *
- * @package ZEROSPAM\Framework\SDK\Response\Api\Collection
+ * @package Stainless\Client\Response\Api\Collection
  */
 abstract class CollectionResponse extends BaseResponse implements \IteratorAggregate, \ArrayAccess
 {

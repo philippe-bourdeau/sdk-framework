@@ -6,7 +6,7 @@
  * Time: 09:43
  */
 
-namespace ZEROSPAM\Framework\SDK\Request\Api;
+namespace Stainless\Client\Request\Api;
 
 trait HasNullableFields
 {

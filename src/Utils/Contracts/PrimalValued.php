@@ -6,14 +6,14 @@
  * Time: 4:24 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Contracts;
+namespace Stainless\Client\Utils\Contracts;
 
 /**
  * Interface PrimalValued
  *
  * Can be reduced to primitive value
  *
- * @package ZEROSPAM\Framework\SDK\Utils\Contracts
+ * @package Stainless\Client\Utils\Contracts
  */
 interface PrimalValued
 {

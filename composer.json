@@ -1,36 +1,33 @@
 {
-  "name": "zerospam/sdk-framework",
-  "description": "Framework to build SDK",
-  "license": "MIT",
+  "name": "stainless/client-framework",
+  "license": "free software",
   "authors": [
     {
-      "name" : "Phil"
+      "name" : "stainless"
     }
   ],
   "keywords": [
-    "sdk",
-    "framework"
+    "client",
+    "guzzle",
+    "json"
   ],
   "require": {
     "php": "^8.0",
-    "nesbot/carbon": "^1.25 || ^2.0",
+    "nesbot/carbon": "^2.0",
     "guzzlehttp/guzzle": "^7.0",
-    "marc-mabe/php-enum": "^3.0 || ^4.0",
-    "league/oauth2-client": "^2.3",
+    "marc-mabe/php-enum": "^4.0",
     "ext-json": "*"
   },
   "require-dev": {
     "mockery/mockery": "^1.1",
     "phpunit/phpunit": "^9.5",
     "squizlabs/php_codesniffer": "^3.2",
-    "php-coveralls/php-coveralls": "^2.0",
     "phploc/phploc": "^7.0",
     "dms/phpunit-arraysubset-asserts": "^v0.3.0"
   },
   "autoload": {
     "psr-4": {
-      "ZEROSPAM\\Framework\\SDK\\": "src/",
-      "ZEROSPAM\\Framework\\SDK\\Test\\Base\\": "tests/src/Base"
+      "Stainless\\Client\\": "src/"
     },
     "files": [
       "src/Utils/Helpers/array.php"
@@ -38,7 +35,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "ZEROSPAM\\Framework\\SDK\\Test\\Tests\\": "tests/src/Tests"
+      "Stainless\\Client\\Test\\": "tests/src/"
     }
   }
 }

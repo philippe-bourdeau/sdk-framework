@@ -1,10 +1,10 @@
 <?php
 
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests;
+namespace Stainless\Client\Test\Tests;
 
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
+use Stainless\Client\Test\Base\Data\Request\TestRequest;
+use Stainless\Client\Test\Base\TestCase;
 
 class ClientTest extends TestCase
 {

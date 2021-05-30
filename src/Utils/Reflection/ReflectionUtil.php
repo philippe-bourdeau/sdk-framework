@@ -6,26 +6,56 @@
  * Time: 4:52 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Reflection;
+namespace Stainless\Client\Utils\Reflection;
 
 use Carbon\Carbon;
-use ZEROSPAM\Framework\SDK\Request\Api\WithNullableFields;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
-use ZEROSPAM\Framework\SDK\Utils\Contracts\Arrayable;
-use ZEROSPAM\Framework\SDK\Utils\Contracts\PrimalValued;
-use ZEROSPAM\Framework\SDK\Utils\Str;
+use GuzzleHttp\Utils;
+use Stainless\Client\Request\Api\WithNullableFields;
+use Stainless\Client\Response\Api\IResponse;
+use Stainless\Client\Utils\Contracts\Arrayable;
+use Stainless\Client\Utils\Contracts\PrimalValued;
+use Stainless\Client\Utils\Str;
 
 /**
  * Class ReflectionUtil
  *
  * Helper for gathering all the properties of an object
  *
- * @package ZEROSPAM\Framework\SDK\Utils\Reflection
+ * @package Stainless\Client\Utils\Reflection
  */
 final class ReflectionUtil
 {
     private function __construct()
     {
+    }
+
+    public static function arrayToObject(array $array) {
+        return Utils::jsonDecode(Utils::jsonEncode($array));
+    }
+
+    /**
+     * Set object properties using another object and reflection
+     *
+     * @param $input
+     * @param $destination
+     * @throws \ReflectionException
+     */
+    public static function setProperties($input, $destination): void {
+        $reflectionProperties = (new \ReflectionClass($destination))->getProperties();
+
+        array_walk(
+            $reflectionProperties,
+            function (
+                array $result,
+                \ReflectionProperty $property
+            ) use (
+                $input, $destination
+            ) {
+                $property->setAccessible(true);
+
+                $destination->{$property->getName()} = $property->getValue($input);
+            },
+        );
     }
 
     /**

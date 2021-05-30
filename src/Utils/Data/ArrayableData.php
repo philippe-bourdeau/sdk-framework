@@ -6,13 +6,13 @@
  * Time: 13:08
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Data;
+namespace Stainless\Client\Utils\Data;
 
-use ZEROSPAM\Framework\SDK\Request\Api\HasNullableFields;
-use ZEROSPAM\Framework\SDK\Request\Api\WithNullableFields;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
-use ZEROSPAM\Framework\SDK\Utils\Contracts\DataObject;
-use ZEROSPAM\Framework\SDK\Utils\Reflection\ReflectionUtil;
+use Stainless\Client\Request\Api\HasNullableFields;
+use Stainless\Client\Request\Api\WithNullableFields;
+use Stainless\Client\Response\Api\IResponse;
+use Stainless\Client\Utils\Contracts\DataObject;
+use Stainless\Client\Utils\Reflection\ReflectionUtil;
 
 /**
  * Class ArrayableData
@@ -20,7 +20,7 @@ use ZEROSPAM\Framework\SDK\Utils\Reflection\ReflectionUtil;
  * Data to be used in Request. Will be transform into an array
  * By default use all the available properties to do so.
  *
- * @package ZEROSPAM\Framework\SDK\Utils\Data
+ * @package Stainless\Client\Utils\Data
  */
 abstract class ArrayableData implements DataObject, WithNullableFields
 {

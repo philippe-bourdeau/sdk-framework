@@ -6,17 +6,19 @@
  * Time: 15:24.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Utils;
+namespace Stainless\Client\Test\Tests\Utils;
 
 use Carbon\Carbon;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\Data\TestDataObject;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicEnum;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicObj;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicObjArrayEnum;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicObjEnum;
-use ZEROSPAM\Framework\SDK\Utils\Reflection\ReflectionUtil;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Utils;
+use Stainless\Client\Test\Base\Data\Response\Data\TestDataObject;
+use Stainless\Client\Test\Base\Data\Response\TestResponse;
+use Stainless\Client\Test\Base\TestCase;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicObj;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicObjArrayEnum;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicObjEnum;
+use Stainless\Client\Utils\Reflection\ReflectionUtil;
 
 class ReflectionTest extends TestCase
 {
@@ -57,7 +59,12 @@ class ReflectionTest extends TestCase
     public function testDataPopulateFromResponse(): void
     {
         $date     = 'Wed, 26 Sep 2018 15:43:11 GMT';
-        $response = new TestResponse(['test_date' => $date, 'test' => 'blah']);
+        $response = new TestResponse(new Response(
+            200,
+            [],
+
+
+        ));
         $dataObj  = \Mockery::mock(new TestDataObject())
                             ->shouldReceive('setTestDate')
                             ->with(Carbon::class)
@@ -69,4 +76,41 @@ class ReflectionTest extends TestCase
 
         $dataObj->shouldNotHaveReceived('setTest');
     }
+
+    public function testArrayToObject()
+    {
+        $array = [
+            'cool' => [
+                'sauce' => 'red',
+                'goood' => 'times'
+            ],
+            'nice' => 'view',
+            'plop'
+        ];
+
+        $result = ReflectionUtil::arrayToObject($array);
+
+        $this->assertTrue($result->{'cool'}->{'sauce'} === 'red');
+    }
+
+    public function testObjectToResponse()
+    {
+        $array = [
+            'cool' => [
+                'sauce' => 'red',
+                'goood' => 'times'
+            ],
+            'nice' => 'view',
+            'plop'
+        ];
+
+        $response = new TestResponse(new Response(
+            200,
+            [],
+            Utils::jsonEncode($array)
+        ));
+
+        $this->assertTrue($response->{'nice'} === 'view');
+    }
+
 }

@@ -6,10 +6,10 @@
  * Time: 15:30.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Utils;
+namespace Stainless\Client\Test\Tests\Utils;
 
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
-use ZEROSPAM\Framework\SDK\Utils\Str;
+use Stainless\Client\Test\Base\TestCase;
+use Stainless\Client\Utils\Str;
 
 class StrTest extends TestCase
 {

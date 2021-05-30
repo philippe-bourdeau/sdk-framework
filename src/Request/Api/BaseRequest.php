@@ -6,7 +6,7 @@
  * Time: 4:35 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Request\Api;
+namespace Stainless\Client\Request\Api;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
@@ -16,7 +16,7 @@ use GuzzleHttp\RequestOptions;
  *
  * Represent a base request that will be sent to the API Server
  *
- * @package ZEROSPAM\Framework\SDK\Request\Api
+ * @package Stainless\Client\Request\Api
  */
 abstract class BaseRequest extends Request implements IRequest
 {

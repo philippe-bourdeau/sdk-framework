@@ -1,12 +1,12 @@
 <?php
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Client;
+namespace Stainless\Client\Test\Base\Client;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use ZEROSPAM\Framework\SDK\Client\BaseClient;
-use ZEROSPAM\Framework\SDK\Test\Tests\Middleware\TestingMiddlewares;
+use Stainless\Client\Client\BaseClient;
+use Stainless\Client\Test\Tests\Middleware\TestingMiddlewares;
 
 class TestClient extends BaseClient
 {

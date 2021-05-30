@@ -1,15 +1,15 @@
 <?php
 
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Request;
+namespace Stainless\Client\Test\Base\Data\Request;
 
 
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
-use ZEROSPAM\Framework\SDK\Request\Type\HTTP_METHOD;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
+use Stainless\Client\Request\Type\HTTP_METHOD;
+use Stainless\Client\Response\Api\IResponse;
+use Stainless\Client\Test\Base\Data\Response\TestResponse;
 
 class TestChildRequest extends TestRequest
 {

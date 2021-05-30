@@ -6,10 +6,10 @@
  * Time: 11:41
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Response\Data;
+namespace Stainless\Client\Test\Base\Data\Response\Data;
 
 use Carbon\Carbon;
-use ZEROSPAM\Framework\SDK\Utils\Data\ArrayableData;
+use Stainless\Client\Utils\Data\ArrayableData;
 
 class TestDataObject extends ArrayableData
 {

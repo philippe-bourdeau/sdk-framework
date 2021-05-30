@@ -6,10 +6,10 @@
  * Time: 09:50
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Request;
+namespace Stainless\Client\Test\Tests\Request;
 
-use ZEROSPAM\Framework\SDK\Test\Base\Request\NullableTestRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
+use Stainless\Client\Test\Base\Request\NullableTestRequest;
+use Stainless\Client\Test\Base\TestCase;
 
 class NullableRequestTest extends TestCase
 {

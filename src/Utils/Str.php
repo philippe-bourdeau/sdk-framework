@@ -6,14 +6,14 @@
  * Time: 4:10 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils;
+namespace Stainless\Client\Utils;
 
 /**
  * Class Str
  *
  * Helper to work with strings
  *
- * @package ZEROSPAM\Framework\SDK\Utils
+ * @package Stainless\Client\Utils
  */
 final class Str
 {

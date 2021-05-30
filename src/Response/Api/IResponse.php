@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ZEROSPAM\Framework\SDK\Response\Api;
+namespace Stainless\Client\Response\Api;
 
 
 use Psr\Http\Message\ResponseInterface;

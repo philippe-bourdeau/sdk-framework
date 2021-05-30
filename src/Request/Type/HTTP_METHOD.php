@@ -6,7 +6,7 @@
  * Time: 4:37 PM.
  */
 
-namespace ZEROSPAM\Framework\SDK\Request\Type;
+namespace Stainless\Client\Request\Type;
 
 use MabeEnum\Enum;
 

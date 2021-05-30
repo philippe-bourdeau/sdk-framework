@@ -6,17 +6,17 @@
  * Time: 16:26.
  */
 
-namespace ZEROSPAM\Framework\SDK\Request\Api;
+namespace Stainless\Client\Request\Api;
 
-use ZEROSPAM\Framework\SDK\Utils\Contracts\PrimalValued;
-use ZEROSPAM\Framework\SDK\Utils\Str;
+use Stainless\Client\Utils\Contracts\PrimalValued;
+use Stainless\Client\Utils\Str;
 
 /**
  * Trait BindableRequest
  *
  * To be used when you need bindings in your api route url.
  *
- * @package ZEROSPAM\Framework\SDK\Request\Api
+ * @package Stainless\Client\Request\Api
  */
 trait IsBindable
 {

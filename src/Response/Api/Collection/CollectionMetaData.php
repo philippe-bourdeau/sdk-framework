@@ -6,9 +6,9 @@
  * Time: 11:38
  */
 
-namespace ZEROSPAM\Framework\SDK\Response\Api\Collection;
+namespace Stainless\Client\Response\Api\Collection;
 
-use ZEROSPAM\Framework\SDK\Utils\Str;
+use Stainless\Client\Utils\Str;
 
 /**
  * Class CollectionPagination

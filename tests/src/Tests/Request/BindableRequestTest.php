@@ -6,12 +6,12 @@
  * Time: 15:40.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Request;
+namespace Stainless\Client\Test\Tests\Request;
 
-use ZEROSPAM\Framework\SDK\Test\Base\Request\BindableMultiTestRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\Request\BindableTestRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicEnum;
+use Stainless\Client\Test\Base\Request\BindableMultiTestRequest;
+use Stainless\Client\Test\Base\Request\BindableTestRequest;
+use Stainless\Client\Test\Base\TestCase;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
 
 class BindableRequestTest extends TestCase
 {

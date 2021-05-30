@@ -6,23 +6,20 @@
  * Time: 09:55
  */
 
-namespace ZEROSPAM\Framework\SDK\Response\Api;
+namespace Stainless\Client\Response\Api;
 
-use ZEROSPAM\Framework\SDK\Exception\Response\NoActionEmptyResponseException;
-use ZEROSPAM\Framework\SDK\Response\Api\Helper\RateLimitedTrait;
-use ZEROSPAM\Framework\SDK\Utils\Contracts\DataObject;
+use Exception;
+use Stainless\Client\Utils\Contracts\DataObject;
 
 /**
  * Class EmptyResponse
  *
  * Response to represent the code 202
  *
- * @package ZEROSPAM\Framework\SDK\Response\Api
+ * @package Stainless\Client\Response\Api
  */
-final class EmptyResponse implements IRateLimitedResponse
+final class EmptyResponse extends BaseResponse
 {
-    use RateLimitedTrait;
-
     public function __isset($name)
     {
         return false;
@@ -31,24 +28,23 @@ final class EmptyResponse implements IRateLimitedResponse
     /**
      * @param $name
      *
-     * @throws NoActionEmptyResponseException
+     * @throws Exception
      */
     public function __get($name)
     {
-        throw new NoActionEmptyResponseException('Empty response has no data');
+        throw new Exception('Empty response has no data');
     }
 
     /**
      * @param $name
      * @param $value
      *
-     * @throws NoActionEmptyResponseException
+     * @throws Exception
      */
     public function __set($name, $value)
     {
-        throw new NoActionEmptyResponseException('Empty response has no data');
+        throw new Exception('Empty response has no data');
     }
-
 
     /**
      * Data contained in the response.
@@ -58,32 +54,6 @@ final class EmptyResponse implements IRateLimitedResponse
     public function data(): array
     {
         return [];
-    }
-
-    /**
-     * Get a specific field.
-     *
-     * @param string $field
-     *
-     * @return mixed|null
-     * @throws NoActionEmptyResponseException
-     */
-    public function get($field)
-    {
-        throw new NoActionEmptyResponseException('Empty response has no data');
-    }
-
-    /**
-     * Return value in response array of the response.
-     *
-     * @param $key
-     *
-     * @return mixed
-     * @throws NoActionEmptyResponseException
-     */
-    public function getRawValue($key)
-    {
-        throw new NoActionEmptyResponseException('Empty response has no data');
     }
 
     public function populateDataObject(DataObject &$dataObject): void

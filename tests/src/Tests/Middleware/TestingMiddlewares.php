@@ -1,9 +1,9 @@
 <?php
 
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Middleware;
+namespace Stainless\Client\Test\Tests\Middleware;
 
-use ZEROSPAM\Framework\SDK\Middleware\AddRequestHeaderMiddleware;
+use Stainless\Client\Middleware\AddRequestHeaderMiddleware;
 
 class TestingMiddlewares
 {

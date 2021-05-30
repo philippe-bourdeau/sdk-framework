@@ -6,7 +6,7 @@
  * Time: 14:33
  */
 
-namespace ZEROSPAM\Framework\SDK\Response\Api\Collection\Iterator;
+namespace Stainless\Client\Response\Api\Collection\Iterator;
 
 class ImmutableTransformerIterator extends \ArrayIterator
 {

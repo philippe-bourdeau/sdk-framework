@@ -6,12 +6,12 @@
  * Time: 11:10
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Collection;
+namespace Stainless\Client\Test\Base\Data\Collection;
 
-use ZEROSPAM\Framework\SDK\Response\Api\Collection\CollectionMetaData;
-use ZEROSPAM\Framework\SDK\Response\Api\Collection\CollectionResponse;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
+use Stainless\Client\Response\Api\Collection\CollectionMetaData;
+use Stainless\Client\Response\Api\Collection\CollectionResponse;
+use Stainless\Client\Response\Api\IResponse;
+use Stainless\Client\Test\Base\Data\Response\TestResponse;
 
 class CollectionTestResponse extends CollectionResponse implements IResponse
 {

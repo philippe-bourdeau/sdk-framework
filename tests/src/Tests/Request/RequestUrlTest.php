@@ -1,12 +1,12 @@
 <?php
 
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Request;
+namespace Stainless\Client\Test\Tests\Request;
 
 
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestChildRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Request\TestRequest;
-use ZEROSPAM\Framework\SDK\Test\Base\TestCase;
+use Stainless\Client\Test\Base\Data\Request\TestChildRequest;
+use Stainless\Client\Test\Base\Data\Request\TestRequest;
+use Stainless\Client\Test\Base\TestCase;
 
 class RequestUrlTest extends TestCase
 {

@@ -6,21 +6,21 @@
  * Time: 15:38.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Request;
+namespace Stainless\Client\Test\Base\Request;
 
 use Psr\Http\Message\ResponseInterface;
-use ZEROSPAM\Framework\SDK\Request\Api\BaseRequest;
-use ZEROSPAM\Framework\SDK\Request\Api\IsBindable;
-use ZEROSPAM\Framework\SDK\Response\Api\IResponse;
-use ZEROSPAM\Framework\SDK\Test\Base\Data\Response\TestResponse;
-use ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj\BasicEnum;
+use Stainless\Client\Request\Api\BaseRequest;
+use Stainless\Client\Request\Api\IsBindable;
+use Stainless\Client\Response\Api\IResponse;
+use Stainless\Client\Test\Base\Data\Response\TestResponse;
+use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
 
 /**
  * Class BindableTestRequest
  *
  * Test Request to test Binding URL
  *
- * @package ZEROSPAM\Framework\SDK\Test\Base\Request
+ * @package Stainless\Client\Test\Base\Request
  */
 class BindableTestRequest extends BaseRequest
 {

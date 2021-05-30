@@ -6,10 +6,10 @@
  * Time: 14:19.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Data\Response;
+namespace Stainless\Client\Test\Base\Data\Response;
 
 use Carbon\Carbon;
-use ZEROSPAM\Framework\SDK\Response\Api\BaseResponse;
+use Stainless\Client\Response\Api\BaseResponse;
 
 /**
  * Class TestResponse.

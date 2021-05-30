@@ -6,16 +6,16 @@
  * Time: 9:08 AM
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Contracts\Enums;
+namespace Stainless\Client\Utils\Contracts\Enums;
 
-use ZEROSPAM\Framework\SDK\Utils\Str;
+use Stainless\Client\Utils\Str;
 
 /**
  * Trait EnumToStringLowerTrait
  *
  * Common code for Enum Insensitive implementations
  *
- * @package ZEROSPAM\Framework\SDK\Utils\Contracts\Enums
+ * @package Stainless\Client\Utils\Contracts\Enums
  */
 trait EnumToStringLowerTrait
 {

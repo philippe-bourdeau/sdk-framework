@@ -6,14 +6,14 @@
  * Time: 15:39.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Request;
+namespace Stainless\Client\Test\Base\Request;
 
 /**
  * Class BindableMultiTestRequest
  *
  * Request to test the URL Multi binding
  *
- * @package ZEROSPAM\Framework\SDK\Test\Base\Request
+ * @package Stainless\Client\Test\Base\Request
  */
 class BindableMultiTestRequest extends BindableTestRequest
 {

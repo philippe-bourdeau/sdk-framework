@@ -6,7 +6,7 @@
  * Time: 13:53.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Base\Client;
+namespace Stainless\Client\Test\Base\Client;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface;
@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * History of mockup transaction
  *
- * @package ZEROSPAM\Framework\SDK\Test\Base\Container
+ * @package Stainless\Client\Test\Base\Container
  */
 class Transaction
 {

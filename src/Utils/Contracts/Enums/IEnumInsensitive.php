@@ -6,12 +6,12 @@
  * Time: 9:09 AM
  */
 
-namespace ZEROSPAM\Framework\SDK\Utils\Contracts\Enums;
+namespace Stainless\Client\Utils\Contracts\Enums;
 
 /**
  * Interface IEnumInsensitive
  *
- * @package ZEROSPAM\Framework\SDK\Utils\Contracts\Enums
+ * @package Stainless\Client\Utils\Contracts\Enums
  */
 interface IEnumInsensitive
 {

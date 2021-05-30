@@ -1,6 +1,6 @@
 <?php
 
-namespace ZEROSPAM\Framework\SDK\Middleware;
+namespace Stainless\Client\Middleware;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;

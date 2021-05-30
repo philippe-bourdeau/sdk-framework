@@ -6,7 +6,7 @@
  * Time: 15:27.
  */
 
-namespace ZEROSPAM\Framework\SDK\Test\Tests\Utils\Obj;
+namespace Stainless\Client\Test\Tests\Utils\Obj;
 
 class BasicObj
 {

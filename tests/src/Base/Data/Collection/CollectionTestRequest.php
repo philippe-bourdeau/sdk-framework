@@ -4,7 +4,6 @@ namespace Stainless\Client\Test\Base\Data\Collection;
 
 use Psr\Http\Message\ResponseInterface;
 use Stainless\Client\Request\Api\BaseRequest;
-use Stainless\Client\Request\Type\HTTP_METHOD;
 use Stainless\Client\Response\Api\IResponse;
 
 /**
@@ -21,7 +20,7 @@ class CollectionTestRequest extends BaseRequest
      */
     public function getMethod(): string
     {
-        return HTTP_METHOD::HTTP_GET()->getValue();
+        return 'GET';
     }
 
     /**

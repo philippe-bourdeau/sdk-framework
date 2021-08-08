@@ -1,6 +1,6 @@
 {
   "name": "stainless/client-framework",
-  "license": "free software",
+  "license": "`free software`",
   "authors": [
     {
       "name" : "stainless"
@@ -15,8 +15,9 @@
     "php": "^8.0",
     "nesbot/carbon": "^2.0",
     "guzzlehttp/guzzle": "^7.0",
-    "marc-mabe/php-enum": "^4.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "laravel/helpers": "^1.4",
+    "myclabs/php-enum": "^1.8"
   },
   "require-dev": {
     "mockery/mockery": "^1.1",

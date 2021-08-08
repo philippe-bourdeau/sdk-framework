@@ -6,7 +6,6 @@ use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Stainless\Client\Request\Api\BaseRequest;
-use Stainless\Client\Request\Type\HTTP_METHOD;
 use Stainless\Client\Response\Api\IResponse;
 use Stainless\Client\Test\Base\Data\Response\TestResponse;
 
@@ -29,7 +28,7 @@ class TestRequest extends BaseRequest
      */
     public function getMethod(): string
     {
-        return HTTP_METHOD::HTTP_GET;
+        return 'GET';
     }
 
     /**

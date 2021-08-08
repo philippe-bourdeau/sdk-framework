@@ -7,7 +7,6 @@ namespace Stainless\Client\Test\Base\Data\Request;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
-use Stainless\Client\Request\Type\HTTP_METHOD;
 use Stainless\Client\Response\Api\IResponse;
 use Stainless\Client\Test\Base\Data\Response\TestResponse;
 
@@ -27,7 +26,7 @@ class TestChildRequest extends TestRequest
      */
     public function getMethod(): string
     {
-        return HTTP_METHOD::HTTP_GET;
+        return 'GET';
     }
 
     /**

@@ -31,6 +31,6 @@ class CollectionTestRequest extends BaseRequest
      */
     public function response(ResponseInterface $response): IResponse
     {
-        return new CollectionTestResponse($response);
+        return new BaseCollectionTestResponse($response);
     }
 }

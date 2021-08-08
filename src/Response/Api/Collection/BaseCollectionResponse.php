@@ -10,13 +10,10 @@ use Stainless\Client\Response\Api\BaseResponse;
 use Stainless\Client\Response\Api\Collection\Iterator\ImmutableTransformerIterator;
 
 /**
- * Class CollectionResponse
- *
- * Represent a response that contains more Responses
- *
+ * Class BaseCollectionResponse
  * @package Stainless\Client\Response\Api\Collection
  */
-abstract class CollectionResponse extends BaseResponse implements IteratorAggregate, ArrayAccess
+abstract class BaseCollectionResponse extends BaseResponse implements IteratorAggregate, ArrayAccess
 {
     public function __construct(ResponseInterface $response)
     {
@@ -34,16 +31,11 @@ abstract class CollectionResponse extends BaseResponse implements IteratorAggreg
     {
         return new ImmutableTransformerIterator(
             function (array $data) {
-                return static::toCollectionItem($data);
+                return static::toItem($data);
             },
-            $this->unserializeData()
+            $this->toArray()
         );
     }
-
-    protected function data(): array {
-        return $this->toArray();
-    }
-
 
     /**
      * Whether a offset exists

@@ -2,12 +2,12 @@
 
 namespace Stainless\Client\Test\Base\Data\Collection;
 
-use JetBrains\PhpStorm\Pure;
 use Psr\Http\Message\ResponseInterface;
-use Stainless\Client\Response\Api\Collection\CollectionResponse;
+use Stainless\Client\Response\Api\BaseDTO;
+use Stainless\Client\Response\Api\Collection\BaseCollectionResponse;
 use Stainless\Client\Response\Api\IResponse;
 
-class CollectionTestResponse extends CollectionResponse implements IResponse
+class BaseCollectionTestResponse extends BaseCollectionResponse implements IResponse
 {
     /**
      * CollectionTestResponse constructor.
@@ -22,11 +22,10 @@ class CollectionTestResponse extends CollectionResponse implements IResponse
     /**
      * @param array $data
      *
-     * @return CollectionTestResponseItem
+     * @return BaseDTO
      */
-    #[Pure]
-    protected static function toCollectionItem(array $data): CollectionTestResponseItem
+    protected static function toItem(array $data): BaseDTO
     {
-        return new CollectionTestResponseItem($data);
+        return new BaseDTO($data);
     }
 }

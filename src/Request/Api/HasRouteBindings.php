@@ -2,7 +2,8 @@
 
 namespace Stainless\Client\Request\Api;
 
-use Stainless\Client\Utils\Str;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 trait HasRouteBindings
 {
@@ -41,7 +42,7 @@ trait HasRouteBindings
         $url = str_replace($bindingsPatterns, array_values($this->routeBindings), $this->baseRoute());
 
         if (Str::contains($url, ':')) {
-            throw new \InvalidArgumentException('One or more route bindings are not set.');
+            throw new InvalidArgumentException('One or more route bindings are not set.');
         }
 
         return $url;

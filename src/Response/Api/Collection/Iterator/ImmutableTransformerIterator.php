@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-20
- * Time: 14:33
- */
 
 namespace Stainless\Client\Response\Api\Collection\Iterator;
 

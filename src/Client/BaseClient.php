@@ -19,9 +19,9 @@ abstract class BaseClient implements IClient
      * Client constructor
      * Override client with your own custom client/handler or use configuration values
      *
-     * @param string $baseUri
-     * @param array $headers
-     * @param HandlerStack|null $handler
+     * @param  string  $baseUri
+     * @param  array  $headers
+     * @param  HandlerStack|null  $handler
      */
     public function __construct(
         string $baseUri,
@@ -40,7 +40,7 @@ abstract class BaseClient implements IClient
     /**
      * Process the given request and return an array containing the results.
      *
-     * @param IRequest $request
+     * @param  IRequest  $request
      *
      * @return IResponse
      * @throws GuzzleException

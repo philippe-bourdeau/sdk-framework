@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-07-16
- * Time: 09:55
- */
 
 namespace Stainless\Client\Response\Api;
 
 use Exception;
-use Stainless\Client\Utils\Contracts\DataObject;
 
 /**
  * Class EmptyResponse
@@ -26,11 +19,11 @@ final class EmptyResponse extends BaseResponse
     }
 
     /**
-     * @param $name
+     * @param $field
      *
      * @throws Exception
      */
-    public function __get($name)
+    public function __get($field)
     {
         throw new Exception('Empty response has no data');
     }
@@ -54,10 +47,5 @@ final class EmptyResponse extends BaseResponse
     public function data(): array
     {
         return [];
-    }
-
-    public function populateDataObject(DataObject &$dataObject): void
-    {
-        // TODO: Implement populateDataObject() method.
     }
 }

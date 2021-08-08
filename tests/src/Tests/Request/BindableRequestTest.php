@@ -1,17 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-01
- * Time: 15:40.
- */
 
 namespace Stainless\Client\Test\Tests\Request;
 
+use GuzzleHttp\Exception\GuzzleException;
+use InvalidArgumentException;
+use Stainless\Client\Test\Base\Data\Response\TestResponse;
 use Stainless\Client\Test\Base\Request\BindableMultiTestRequest;
 use Stainless\Client\Test\Base\Request\BindableTestRequest;
 use Stainless\Client\Test\Base\TestCase;
-use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
+use stdClass;
 
 class BindableRequestTest extends TestCase
 {
@@ -24,17 +21,6 @@ class BindableRequestTest extends TestCase
         $bindableRequest->setNiceId(4)->setTestId(5);
 
         $this->assertEquals('test/5/nice/4', $bindableRequest->uri());
-    }
-
-    /**
-     * @test
-     */
-    public function bindable_replace_bindings_enum()
-    {
-        $bindableRequest = new BindableTestRequest();
-        $bindableRequest->setNiceId(4)->setTestEnum(BasicEnum::TEST());
-
-        $this->assertEquals('test/test/nice/4', $bindableRequest->uri());
     }
 
     /**
@@ -53,10 +39,10 @@ class BindableRequestTest extends TestCase
      */
     public function bindable_failure_exception_object()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $bindableRequest = new BindableMultiTestRequest();
-        $bindableRequest->setNiceId(new \stdClass());
+        $bindableRequest->setNiceId(new stdClass());
     }
 
     /**
@@ -64,7 +50,7 @@ class BindableRequestTest extends TestCase
      */
     public function bindable_failure_exception_array()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $bindableRequest = new BindableMultiTestRequest();
         $bindableRequest->setNiceId([]);
@@ -73,9 +59,9 @@ class BindableRequestTest extends TestCase
     /**
      * @test
      */
-    public function bindable_failure_override()
+    public function test_multiple_bindings_failure()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $bindableRequest = new BindableMultiTestRequest();
         $bindableRequest->setNiceId(1)->setNiceId(5);
@@ -83,16 +69,17 @@ class BindableRequestTest extends TestCase
 
     /**
      * @test
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    public function bindableRequestResponse()
+    public function test_request_and_response()
     {
         $bindableRequest = new BindableTestRequest();
-        $bindableRequest->setNiceId(4)->setTestEnum(BasicEnum::TEST());
+        $bindableRequest->setNiceId(4)->setTestId(1);
 
         $client = $this->prepareClientSuccess([]);
         $response = $client->processRequest($bindableRequest);
 
-        $this->assertEquals('test/test/nice/4', $bindableRequest->uri());
+        $this->assertEquals('test/1/nice/4', $bindableRequest->uri());
+        $this->assertTrue($response instanceof TestResponse);
     }
 }

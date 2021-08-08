@@ -28,10 +28,7 @@
   "autoload": {
     "psr-4": {
       "Stainless\\Client\\": "src/"
-    },
-    "files": [
-      "src/Utils/Helpers/array.php"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-01
- * Time: 14:18.
- */
 
 namespace Stainless\Client\Test\Base\Data\Request;
 

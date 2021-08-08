@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-20
- * Time: 11:15
- */
 
 namespace Stainless\Client\Test\Tests\Request;
 
@@ -56,7 +50,7 @@ JSON;
         $client = $this->prepareClientSuccess($json);
 
         $request = new CollectionTestRequest();
-        $client->getOAuthTestClient()->processRequest($request);
+        $response = $client->processRequest($request);
 
         $response = $request->getGuzzleResponse();
         $this->assertCount(2, $response);

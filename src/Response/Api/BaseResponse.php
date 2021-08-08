@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 30/05/18
- * Time: 4:08 PM.
- */
 
 namespace Stainless\Client\Response\Api;
 
@@ -21,14 +15,9 @@ use Stainless\Client\Utils\Str;
  */
 abstract class BaseResponse extends Response implements IResponse
 {
-    /**
-     * Dates to be transTyped from string to Carbon.
-     *
-     * @var string[]
-     */
+    /** @var array Date fields to be mutated from string to Carbon */
     protected array $dates = [];
-    protected array $data;
-    private ResponseInterface $guzzleResponse;
+    protected ResponseInterface $guzzleResponse;
 
     public function __construct(ResponseInterface $response)
     {
@@ -41,15 +30,27 @@ abstract class BaseResponse extends Response implements IResponse
             $response->getProtocolVersion(),
             $response->getReasonPhrase()
         );
+    }
 
-        $this->setProperties();
+    protected function unserializeData() {
+        return Utils::jsonDecode(
+            $this->getBody()->getContents(),
+            true
+        );
     }
 
     /**
+     * @return array
      */
-    private function setProperties()
-    {
-        $this->data = $data = Utils::jsonDecode($this->getBody()->getContents(), true);
+    protected function toArray(): array {
+
+    }
+
+    /**
+     * @return array
+     */
+    protected function data(): array {
+        $data = $this->unserializeData();
 
         foreach ($data as $key => $value) {
             $method = sprintf('set%s', ucfirst(Str::camel($key)));
@@ -59,30 +60,24 @@ abstract class BaseResponse extends Response implements IResponse
 
             $this->{$method}($value);
         }
+
+        return $data;
     }
 
     public function __isset($name)
     {
-        return isset($this->data[$name])
-            || method_exists($this, sprintf('get%sAttribute', Str::studly($name)))
-            || (isset($this->dates) && in_array($name, $this->dates));
-    }
-
-    public function __get($name)
-    {
-        return $this->get($name);
+        return isset($this->data()[$name]);
     }
 
     /**
-     * Get a specific field.
+     * Mutate attribute if needed
      *
-     * @param string $field
-     *
-     * @return mixed|null
+     * @param $field
+     * @return Carbon|false|mixed|null
      */
-    public function get(string $field)
+    public function __get($field)
     {
-        $methodName = sprintf('get%sAttribute', Str::studly($field));
+        $methodName = sprintf('get%sAttribute', ucfirst(strtolower($field)));
         if (method_exists($this, $methodName)) {
             return call_user_func(
                 [
@@ -93,13 +88,13 @@ abstract class BaseResponse extends Response implements IResponse
         }
 
         if (isset($this->dates) && in_array($field, $this->dates)) {
-            if (!$dateTime = Carbon::parse($this->data[$field])) {
+            if (!$dateTime = Carbon::parse($this->data()[$field])) {
                 throw new \InvalidArgumentException('Date cannot be parsed');
             }
 
             return $dateTime;
         }
 
-        return $this->data[$field] ?? null;
+        return $this->data()[$field] ?? null;
     }
 }

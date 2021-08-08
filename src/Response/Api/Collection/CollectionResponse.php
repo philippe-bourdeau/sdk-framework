@@ -1,16 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-18
- * Time: 11:38
- */
 
 namespace Stainless\Client\Response\Api\Collection;
 
+use ArrayAccess;
+use ArrayIterator;
+use IteratorAggregate;
+use Psr\Http\Message\ResponseInterface;
 use Stainless\Client\Response\Api\BaseResponse;
 use Stainless\Client\Response\Api\Collection\Iterator\ImmutableTransformerIterator;
-use Stainless\Client\Response\Api\IResponse;
 
 /**
  * Class CollectionResponse
@@ -19,44 +16,11 @@ use Stainless\Client\Response\Api\IResponse;
  *
  * @package Stainless\Client\Response\Api\Collection
  */
-abstract class CollectionResponse extends BaseResponse implements \IteratorAggregate, \ArrayAccess
+abstract class CollectionResponse extends BaseResponse implements IteratorAggregate, ArrayAccess
 {
-
-    /**
-     * @var CollectionMetaData
-     */
-    private $metaData;
-
-    /**
-     * CollectionResponse constructor.
-     *
-     * @param CollectionMetaData $metaData
-     * @param string[]           $data contains the json deserialized into an array of string (or matrix of string)
-     */
-    public function __construct(CollectionMetaData $metaData, array $data)
+    public function __construct(ResponseInterface $response)
     {
-        $this->metaData = $metaData;
-        parent::__construct($data);
-    }
-
-    /**
-     * Transform the basic data (string[]) into a response (IResponse)
-     *
-     * @param array $data
-     *
-     * @return IResponse
-     */
-    abstract protected static function dataToResponse(array $data);
-
-
-    /**
-     * Meta data of the collection (pagination mostly)
-     *
-     * @return CollectionMetaData
-     */
-    public function getMetaData(): CollectionMetaData
-    {
-        return $this->metaData;
+        parent::__construct($response);
     }
 
     /**
@@ -64,16 +28,20 @@ abstract class CollectionResponse extends BaseResponse implements \IteratorAggre
      *
      * @link  http://php.net/manual/en/iteratoraggregate.getiterator.php
      * @since 5.0.0
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {
         return new ImmutableTransformerIterator(
             function (array $data) {
-                return static::dataToResponse($data);
+                return static::toCollectionItem($data);
             },
-            $this->data
+            $this->unserializeData()
         );
+    }
+
+    protected function data(): array {
+        return $this->toArray();
     }
 
 

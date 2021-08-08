@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-01
- * Time: 13:53.
- */
 
 namespace Stainless\Client\Test\Base\Client;
 
@@ -15,38 +9,24 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Class Transaction
  *
- * History of mockup transaction
+ * Data container for mockup transaction
  *
  * @package Stainless\Client\Test\Base\Container
  */
 class Transaction
 {
-    /**
-     * @var RequestInterface
-     */
-    private $request;
-
-    /**
-     * @var ResponseInterface|null
-     */
-    private $response;
-
-    /**
-     * @var array
-     */
-    private $options;
-    /**
-     * @var GuzzleException|null
-     */
-    private $error;
+    private RequestInterface $request;
+    private ?ResponseInterface $response;
+    private array $options;
+    private ?GuzzleException $error;
 
     /**
      * Transaction constructor.
      *
      * @param RequestInterface  $request
      * @param array             $options
-     * @param ResponseInterface $response
-     * @param GuzzleException   $error
+     * @param ?ResponseInterface $response
+     * @param ?GuzzleException   $error
      */
     public function __construct(
         RequestInterface $request,
@@ -61,41 +41,37 @@ class Transaction
     }
 
     /**
-     * Getter for request.
      *
      * @return RequestInterface
      */
-    public function request()
+    public function request(): RequestInterface
     {
         return $this->request;
     }
 
     /**
-     * Getter for response.
      *
      * @return ResponseInterface|null
      */
-    public function response()
+    public function response(): ?ResponseInterface
     {
         return $this->response;
     }
 
     /**
-     * Getter for options.
      *
      * @return array
      */
-    public function options()
+    public function options(): array
     {
         return $this->options;
     }
 
     /**
-     * If an exception got triggered.
      *
      * @return GuzzleException|null
      */
-    public function error()
+    public function error(): ?GuzzleException
     {
         return $this->error;
     }

@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-01
- * Time: 15:38.
- */
 
 namespace Stainless\Client\Test\Base\Request;
 
 use Psr\Http\Message\ResponseInterface;
 use Stainless\Client\Request\Api\BaseRequest;
-use Stainless\Client\Request\Api\IsBindable;
+use Stainless\Client\Request\Api\HasRouteBindings;
 use Stainless\Client\Response\Api\IResponse;
 use Stainless\Client\Test\Base\Data\Response\TestResponse;
-use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
 
 /**
  * Class BindableTestRequest
@@ -24,7 +17,7 @@ use Stainless\Client\Test\Tests\Utils\Obj\BasicEnum;
  */
 class BindableTestRequest extends BaseRequest
 {
-    use IsBindable;
+    use HasRouteBindings;
 
     private $test;
 
@@ -57,13 +50,6 @@ class BindableTestRequest extends BaseRequest
     public function setTestId($id)
     {
         $this->addRouteBinding('testId', $id);
-
-        return $this;
-    }
-
-    public function setTestEnum(BasicEnum $enum)
-    {
-        $this->addRouteBinding('testId', $enum);
 
         return $this;
     }

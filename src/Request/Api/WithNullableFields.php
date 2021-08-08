@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-07-12
- * Time: 09:44
- */
 
 namespace Stainless\Client\Request\Api;
 

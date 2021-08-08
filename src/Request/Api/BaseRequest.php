@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 30/05/18
- * Time: 4:35 PM.
- */
 
 namespace Stainless\Client\Request\Api;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class BaseRequest
@@ -42,6 +38,8 @@ abstract class BaseRequest extends Request implements IRequest
     /**
      * @return array
      */
+    #[Pure]
+    #[ArrayShape([RequestOptions::QUERY => "array", RequestOptions::HEADERS => "array"])]
     public function options(): array
     {
         return [

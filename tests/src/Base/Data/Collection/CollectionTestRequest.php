@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aaflalo
- * Date: 18-06-20
- * Time: 11:09
- */
 
 namespace Stainless\Client\Test\Base\Data\Collection;
 
@@ -16,39 +10,25 @@ use Stainless\Client\Response\Api\IResponse;
 /**
  * Class CollectionTestRequest
  *
- * @method CollectionTestResponse getGuzzleResponse()
  * @package Stainless\Client\Test\Base\Data\Collection
  */
 class CollectionTestRequest extends BaseRequest
 {
-
-
-    /**
-     * The url of the route.
-     *
-     * @return string
-     */
-    public function uri(): string
-    {
-        return 'collection';
-    }
-
     /**
      * Type of request.
      *
-     * @return HTTP_METHOD
+     * @return string
      */
-    public function getMethod(): HTTP_METHOD
+    public function getMethod(): string
     {
-        return HTTP_METHOD::HTTP_GET();
+        return HTTP_METHOD::HTTP_GET()->getValue();
     }
 
     /**
-     * Process the data that is in the response.
      *
      * @param ResponseInterface $response
      *
-     * @return \Stainless\Client\Response\Api\IResponse
+     * @return IResponse
      */
     public function response(ResponseInterface $response): IResponse
     {

@@ -10,3 +10,12 @@ Added docker-compose.yml for easy onboarding
  * xdebug
 
 Collection response still problematic
+
+Notes: 
+
+* Est-ce que Base Request et Base Response devraient heriter des classes guzzle ou uniquement
+l'interface est important ?
+
+* Constructeur de ces deux dernieres classes.
+
+* Transformation de la reponse et automatisation des proprietes
